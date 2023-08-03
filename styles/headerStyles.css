@@ -1,0 +1,16 @@
+.userIcons{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 80px;
+    width: 5%;
+}
+
+.userIcons i{
+    color: var(--third-color);
+    cursor: pointer;
+}
+
+.header img{
+    height: 150%;
+}

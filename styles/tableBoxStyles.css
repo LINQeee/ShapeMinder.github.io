@@ -1,0 +1,107 @@
+.tableBox {
+    width: 100%;
+    height: 92%;
+    min-height: 660px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.actionBox {
+    width: 100%;
+    height: 76px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4%;
+    box-sizing: border-box;
+}
+
+.submit {
+    outline: none;
+    border: none;
+    border-radius: 6px;
+    background-color: var(--third-color);
+    color: var(--second-color);
+    font-family: 'Montserrat', sans-serif;
+    transition: all 0.3s;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.actionBox .submit{
+    filter: drop-shadow(0px 18px 20px rgba(85, 60, 248, 0.25));
+    width: 208px;
+    height: 38px;
+    font-size: 17px;
+}
+
+.submit i:first-child {
+    color: var(--second-color);
+    position: absolute;
+    scale: 0;
+}
+
+.actionBox .submit i:last-child {
+    margin-right: 8px;
+}
+
+.submit:not(:disabled):hover {
+    background-color: var(--second-color);
+    border: 1px solid var(--third-color);
+    color: var(--third-color);
+}
+
+.actionBox .submit:disabled{
+    background-color: #7F75BF;
+    filter: drop-shadow(0px 18px 20px rgba(127, 117, 191, 0.45));
+    cursor: not-allowed;
+}
+
+.buttonsBox .submit:disabled{
+    background-color: #7F75BF;
+    cursor: not-allowed;
+}
+
+.filter {
+    width: 179px;
+    height: 41px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 8%;
+    color: var(--third-color);
+}
+
+.filter i {
+    scale: 2;
+    margin-left: 6px;
+}
+
+.filter span {
+    font-size: 17px;
+    font-weight: 500;
+}
+
+@keyframes submitButton {
+    0% {
+        background-color: var(--second-color);
+        color: var(--third-color);
+    }
+    30%,50% {
+        background-color: var(--third-color);
+        color: var(--third-color);
+    }
+    100% {
+        background-color: #7F75BF;
+        color: var(--second-color);
+    }
+}
+
+@keyframes submitCheck {
+    0% {scale: 0}
+    50% {scale:1.4}
+    100% {scale:0}
+}

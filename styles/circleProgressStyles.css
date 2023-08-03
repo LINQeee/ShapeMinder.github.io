@@ -1,0 +1,73 @@
+:root {
+    --progress-bar-stroke-width: 3.2;
+    --progress-bar-size: 95px;
+}
+
+.progressBar{
+    position: absolute;
+    margin-top: 0.5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--progress-bar-size);
+    height: var(--progress-bar-size);
+}
+
+.progressBar .progressShadow{
+    position: absolute;
+    margin-top: 75%;
+    width: 81px;
+    background: transparent;
+    height: 0;
+    border-radius: 100%;
+}
+
+.blueBar .progressShadow{
+    box-shadow: 0 0 25px 10px rgba(70, 129, 254, 0.2);
+}
+
+.blueBar span{
+    color: #4681FE;
+}
+
+.blueBar .progress-bar__progress{
+    stroke: #4681FE;
+}
+
+.orangeBar .progressShadow{
+    box-shadow: 0 0 25px 10px rgba(253, 108, 65, 0.2);
+}
+
+.orangeBar span{
+    color: #FD6C41;
+}
+
+.orangeBar .progress-bar__progress{
+    stroke: #FD6C41;
+}
+
+.progressBar span{
+    position: absolute;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+svg {
+    height: var(--progress-bar-size);
+    width: var(--progress-bar-size);
+}
+
+.progress-bar__background {
+    fill: none;
+    stroke: #F9F9F9;
+    stroke-width: var(--progress-bar-stroke-width);
+}
+
+.progress-bar__progress {
+    fill: none;
+    stroke-dasharray: 100 100;
+    stroke-dashoffset: 10;
+    stroke-linecap: round;
+    stroke-width: var(--progress-bar-stroke-width);
+    transition: stroke-dashoffset 1s ease-in-out;
+}

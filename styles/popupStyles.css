@@ -1,0 +1,163 @@
+.popupBox{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 352px;
+    width: 26%;
+    height: 100%;
+    position: absolute;
+    z-index: 10;
+    cursor: not-allowed;
+    scale: 0;
+}
+
+.popup {
+    width: 286px;
+    height: 286px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 8px 63px -9px rgba(0, 0, 0, 0.30);
+    padding: 3%;
+    box-sizing: border-box;
+    cursor: initial;
+}
+
+.inputBox {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    width: 100%;
+    height: 32%;
+}
+
+.inputBox label{
+    font-weight: 400;
+    font-size: 18px;
+    margin-bottom: 1%;
+    color: var(--dark-color);
+}
+
+.inputBox input {
+    width: 100%;
+    height: 100%;
+    border-radius: 6px;
+    outline: none;
+    border: 2px solid #A0ADB9;
+    font-weight: 400;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    padding: 2%;
+    box-sizing: border-box;
+    color: var(--dark-color);
+    transition: all 0.3s;
+}
+
+.inputBox input:hover{
+    border-color: #4B545C;
+}
+
+.inputBox input:focus, .inputBox input:valid{
+    border-color: #553CF8;
+}
+
+.inputBox input[type="text"]{
+    text-align: center;
+}
+
+.inputBox .fa-calendar {
+    color: #A0ADB9;
+    position: absolute;
+    margin-top: 4px;
+    margin-left: 3%;
+    scale: 1.6;
+    pointer-events: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.buttonsBox{
+    width: 100%;
+    height: 16%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.buttonsBox button {
+    height: 100%;
+    width: 40%;
+    font-size: 15px;
+}
+
+.cancel {
+    transition: all 0.15s;
+    border: none;
+    outline: none;
+    background: #F7F7F8;
+    border-radius: 7px;
+    font-family: 'Montserrat', sans-serif;
+    color: var(--dark-color);
+    cursor: pointer;
+}
+
+.cancel:hover{
+    background: #E4E4E4;
+}
+
+.cancel:active {
+    background: #B5B5B5;
+}
+
+.inputBox span {
+    font-weight: 400;
+    color: #FF2C2C;
+    font-size: 13px;
+    margin-top: 1%;
+}
+
+.inputBox .fa-circle-exclamation{
+    position: absolute;
+    scale: 1.4;
+    align-self: end;
+    color: #FF2C2C;
+    margin-top: 4px;
+    margin-right: 3%;
+}
+
+.inputBox:not(.error) .fa-circle-exclamation{
+    display: none;
+}
+
+.inputBox:not(.error) span {
+    color: var(--second-color);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.error input, .error input:hover, .error input:focus, .error input:valid {
+    border-color: #FF2C2C;
+}
+
+@keyframes showPopup {
+    0% {filter: blur(10px); scale: 0;}
+    100% {filter: blur(0); scale: 1;}
+}
+
+@keyframes hidePopup {
+    0% {filter: blur(0); scale: 1;}
+    100% {filter: blur(10px); scale: 0;}
+}

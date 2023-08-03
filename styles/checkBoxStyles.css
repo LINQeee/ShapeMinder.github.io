@@ -1,0 +1,51 @@
+.checkBox {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    scale: 1.4;
+}
+
+.checkBox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    margin-left: -1px;
+}
+
+.fa-square-check{
+    color: #4B545C !important;
+}
+
+.checkBox i {
+    top: 0;
+    left: 0;
+    scale: 1;
+    color: #A0ADB9;
+    pointer-events: none;
+    transition: all 0.2s;
+}
+
+.checkBox input:hover ~ i {
+    color: #4B545C;
+}
+
+.checkBox input:checked ~ .fa-square-check {
+    display: inline;
+}
+
+.checkBox input:checked ~ .fa-square {
+    display: none;
+}
+
+.checkBox input:not(:checked) ~ .fa-square-check {
+    display: none;
+}
+
+.checkBox input:not(:checked) ~ .fa-square {
+    display: inline;
+}
+
+td .checkBox, th .checkBox {
+    margin-right: 30%;
+}

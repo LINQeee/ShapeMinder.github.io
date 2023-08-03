@@ -1,0 +1,153 @@
+.recordsTable {
+    width: 100%;
+    height: 90%;
+    min-height: 600px;
+    border-collapse: collapse;
+}
+
+.recordsTable tbody, .recordsTable thead {
+    display: block;
+}
+
+.recordsTable th:not(:nth-child(2)) {
+    font-size: 20px;
+    font-weight: 500;
+    color: #A0ADB9;
+}
+
+.recordsTable tbody {
+    overflow-y: auto;
+    overflow-x: hidden;
+    min-height: 547px;
+    max-height: 100%;
+    height: 70dvh;
+    transition: all .1s;
+    color: #00000000;
+}
+
+.recordsTable thead tr {
+    border-bottom: 2px solid rgba(160, 173, 185, 0.5);
+}
+
+.recordsTable tbody tr:not(:last-child) {
+    background-image: linear-gradient(to right, rgba(160, 173, 185, 0.5) 33%, rgba(255,255,255,0) 0%);
+    background-position: bottom;
+    background-size: 8px 2px;
+    background-repeat: repeat-x;
+}
+
+.recordsTable tr, .recordsTable th {
+    height: 40px;
+}
+
+.recordsTable td:first-child, .recordsTable th:first-child {
+    width: 15px;
+}
+
+.recordsTable td:last-child, .recordsTable th:last-child {
+    text-align: center;
+}
+
+.recordsTable td:nth-child(2), .recordsTable th:nth-child(2) {
+    width: 11.4%;
+    text-align: center;
+}
+
+.recordsTable td:nth-child(3) span, .recordsTable td:nth-child(4) span, .recordsTable td:nth-child(5) i {
+    margin-left: 5px;
+}
+
+.recordsTable td, .recordsTable th {
+    width: 28.7%;
+    text-align: left;
+}
+
+.recordsTable td:nth-child(3), .recordsTable td:nth-child(4) {
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--dark-color);
+}
+
+.tdContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.interactionMenu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.interactionButtons {
+    transform: scaleX(0);
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: 5px;
+    position: absolute;
+    flex-direction: column;
+    width: 43px;
+    height: 81px;
+    border-radius: 3px;
+    box-shadow: 0 2px 30px 0 rgba(0, 0, 0, 0.25);
+    transition: all 0.2s;
+}
+
+.interactionButtons button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 45%;
+    cursor: pointer;
+    background: transparent;
+    outline: none;
+    border: none;
+}
+
+.interactionButtons button:hover i {
+    color: #4B545C;
+}
+
+.interactionMenu .fa-ellipsis{
+    margin-right: 6px;
+}
+
+.interactionMenu:hover .interactionButtons {
+    transform: scaleX(1);
+}
+
+.interactionMenu i {
+    transition: all .2s;
+    cursor: pointer;
+    scale: 1.8;
+    color: #A0ADB9;
+    margin-right: 2px;
+}
+
+.interactionMenu:hover .fa-ellipsis {
+    color: #4B545C;
+}
+
+.recordsTable tbody {
+    scroll-behavior: smooth;
+    scrollbar-gutter: stable;
+}
+
+.recordsTable tbody::-webkit-scrollbar {
+    width: 5px;
+}
+
+.recordsTable tbody::-webkit-scrollbar-track {
+    background-color: transparent;
+    border-radius: 50px;
+}
+
+.recordsTable tbody:hover::-webkit-scrollbar-thumb {
+    border-radius: 20px;
+    background-color: var(--third-color);
+}

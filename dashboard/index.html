@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dashboard</title>
+
+    <link rel="stylesheet" href="http://ShapeMinder.github.io/v6.4.0/css/sharp-regular.css">
+    <link rel="stylesheet" href="http://ShapeMinder.github.io/v6.4.0/css/all.css">
+    <link rel="stylesheet" href="http://ShapeMinder.github.io/v6.4.0/css/sharp-solid.css">
+    <link rel="stylesheet" href="http://ShapeMinder.github.io/v6.4.0/css/sharp-light.css">
+    <link rel="stylesheet" href="http://ShapeMinder.github.io/dashboard/styles.css">
+    <link rel="stylesheet" href="http://ShapeMinder.github.io/styles/headerStyles.css">
+    <link rel="stylesheet" href="http://ShapeMinder.github.io/styles/cardStyles.css">
+    <link rel="stylesheet" href="http://ShapeMinder.github.io/styles/circleProgressStyles.css">
+    <link rel="stylesheet" href="http://ShapeMinder.github.io/styles/checkBoxStyles.css">
+    <link rel="stylesheet" href="http://ShapeMinder.github.io/styles/recordsTableStyles.css">
+    <link rel="stylesheet" href="http://ShapeMinder.github.io/styles/tableBoxStyles.css">
+    <link rel="stylesheet" href="http://ShapeMinder.github.io/styles/datePickerStyles.css">
+    <link rel="stylesheet" href="http://ShapeMinder.github.io/styles/popupStyles.css">
+    <link rel="stylesheet" href="http://ShapeMinder.github.io/styles/adaptiveStyles.css">
+    
+    <link rel="stylesheet" href="../v6.4.0/css/sharp-regular.css">
+    <link rel="stylesheet" href="../v6.4.0/css/all.css">
+    <link rel="stylesheet" href="../v6.4.0/css/sharp-solid.css">
+    <link rel="stylesheet" href="../v6.4.0/css/sharp-light.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../styles/headerStyles.css">
+    <link rel="stylesheet" href="../styles/cardStyles.css">
+    <link rel="stylesheet" href="../styles/circleProgressStyles.css">
+    <link rel="stylesheet" href="../styles/checkBoxStyles.css">
+    <link rel="stylesheet" href="../styles/recordsTableStyles.css">
+    <link rel="stylesheet" href="../styles/tableBoxStyles.css">
+    <link rel="stylesheet" href="../styles/datePickerStyles.css">
+    <link rel="stylesheet" href="../styles/popupStyles.css">
+    <link rel="stylesheet" href="../styles/adaptiveStyles.css">
+</head>
+<body>
+<div class="header">
+    <img src="../images/weightProjectLogo.png" alt="logo">
+    <div class="userIcons">
+        <i class="fa-regular fa-bell fa-2x"></i>
+        <i class="fa-regular fa-circle-user fa-2x"></i>
+    </div>
+</div>
+<div class="main">
+    <div class="statsBox">
+        <div class="currentProgressBox">
+            <span class="sectionHeader">Текущий прогресс</span>
+            <div class="chart panel">
+                <canvas id="chart"></canvas>
+            </div>
+            <div class="cardBox">
+                <div class="card panel">
+                    <div class="iconBox iconBlue">
+                        <i class="fa-regular fa-weight-scale"></i>
+                    </div>
+                    <span class="cardName">Начальный вес</span>
+                    <span class="cardValue">82.2кг</span>
+                </div>
+                <div class="card panel">
+                    <div class="iconBox iconOrange">
+                        <i class="fa-solid fa-fire"></i>
+                    </div>
+                    <span class="cardName">Текущий вес</span>
+                    <span class="cardValue">65.3кг</span>
+                </div>
+                <div class="card panel">
+                    <div class="iconBox iconGreen">
+                        <i class="fa-regular fa-arrow-trend-down"></i>
+                    </div>
+                    <span class="cardName">Сброшено веса</span>
+                    <span class="cardValue">16.9кг</span>
+                </div>
+                <div class="card panel">
+                    <div class="iconBox iconPurple">
+                        <i class="fa-regular fa-calendar"></i>
+                    </div>
+                    <span class="cardName">Дата старта</span>
+                    <span class="cardValue dateText">03.01.2023</span>
+                </div>
+            </div>
+        </div>
+        <div class="goalStatsBox">
+            <span class="sectionHeader">Статистика цели и прогресс</span>
+            <div class="cardBox" id="goalStatsCards">
+                <div class="card panel">
+                    <div class="iconBox iconOrange">
+                        <i class="fa-regular fa-bullseye-arrow"></i>
+                    </div>
+                    <span class="cardName">Цель</span>
+                    <span class="cardValue">63кг</span>
+                </div>
+                <div class="card panel">
+                    <div class="iconBox iconGreen">
+                        <i class="fa-regular fa-timer"></i>
+                    </div>
+                    <span class="cardName">Осталось</span>
+                    <span class="cardValue">2.3кг</span>
+                </div>
+                <div class="card panel">
+                    <div class="iconBox iconRed">
+                        <i class="fa-regular fa-party-horn"></i>
+                    </div>
+                    <span class="cardName">Дата окончания</span>
+                    <span class="cardValue">16.9кг</span>
+                </div>
+                <div class="progressCard panel">
+                    <div class="results">
+                        <span>0.2</span>
+                        <span>0.23</span>
+                    </div>
+                    <div class="progressBar blueBar">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             viewBox="-4 -4 40 40">
+
+                            <circle cx="16" cy="16" r="15.9155"
+                                    class="progress-bar__background"/>
+
+                            <circle cx="16" cy="16" r="15.9155"
+                                    class="progress-bar__progress
+                 js-progress-bar"/>
+                        </svg>
+                        <span>В ДЕНЬ</span>
+                        <div class="progressShadow"></div>
+                    </div>
+                    <div class="labels">
+                        <span>Текущий</span>
+                        <span>Желательный</span>
+                    </div>
+                </div>
+                <div class="progressCard panel">
+                    <div class="results">
+                        <span>2.3</span>
+                        <span>2.5</span>
+                    </div>
+                    <div class="progressBar orangeBar">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             viewBox="-4 -4 40 40">
+
+                            <circle cx="16" cy="16" r="15.9155"
+                                    class="progress-bar__background"/>
+
+                            <circle cx="16" cy="16" r="15.9155"
+                                    class="progress-bar__progress
+                 js-progress-bar"/>
+                        </svg>
+                        <span>В НЕДЕЛЮ</span>
+                        <div class="progressShadow"></div>
+                    </div>
+                    <div class="labels">
+                        <span>Текущий</span>
+                        <span>Желательный</span>
+                    </div>
+                </div>
+            </div>
+            <div class="switches">
+                <div class="buttons panel">
+                    <button onclick="scrollUp()"><i class="fa-solid fa-chevron-up" id="switchUp"></i></button>
+                    <span>1</span>
+                    <button onclick="scrollDown()"><i class="fa-solid fa-chevron-down" id="switchDown"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="recordsBox">
+        <span class="sectionHeader">Ваши записи</span>
+        <div class="tableBox panel">
+            <div id="popup" class="popupBox">
+                <div class="popup panel">
+                    <div class="inputBox">
+                        <label for="dateInput">Дата</label>
+                        <input type="text" id="dateInput" required>
+                        <i class="fa-regular fa-calendar"></i>
+                        <i class="fa-solid fa-circle-exclamation"></i>
+                        <span>Текст ошибки</span>
+                    </div>
+                    <div class="inputBox error">
+                        <label for="weightInput">Вес</label>
+                        <input type="number" id="weightInput" required>
+                        <i class="fa-solid fa-circle-exclamation"></i>
+                        <span>Текст ошибки</span>
+                    </div>
+                    <div class="buttonsBox">
+                        <button class="cancel" onclick="closePopup()">Закрыть</button>
+                        <button class="submit" id="saveButton" onclick="save()"><i class="fa-regular fa-check"></i>Сохранить</button>
+                    </div>
+                </div>
+            </div>
+            <div class="actionBox">
+                <div class="filter">
+                    <i class="fa-regular fa-bars-filter"></i>
+                    <span>Advanced Filters</span>
+                </div>
+                <button class="submit" onclick="openPopup()" id="addRecordButton"><i class="fa-regular fa-check"></i><i
+                        class="fa-regular fa-plus"></i>Добавить запись
+                </button>
+            </div>
+            <table class="recordsTable">
+                <thead>
+                <tr>
+                    <th>
+                    </th>
+                    <th>
+                        <div class="checkBox">
+                            <input type="checkbox">
+                            <i class="fa-regular fa-square-check"></i>
+                            <i class="fa-regular fa-square"></i>
+                        </div>
+                    </th>
+                    <th>DATE</th>
+                    <th>WEIGHT</th>
+                    <th>ACTIONS</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td></td>
+                    <td>
+                        <div class="checkBox">
+                            <input type="checkbox">
+                            <i class="fa-regular fa-square-check"></i>
+                            <i class="fa-regular fa-square"></i>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="dateText">01.12.2023</span>
+                    </td>
+                    <td>
+                        <span>82.1kg</span>
+                    </td>
+                    <td>
+                        <div class="tdContainer">
+                            <div class="interactionMenu">
+                                <i class="fa-solid fa-ellipsis"></i>
+                                <div class="interactionButtons panel">
+                                    <button onclick="openPopup()"><i class="fa-regular fa-pen-to-square"></i></button>
+                                    <button><i class="fa-solid fa-trash-can"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <div class="checkBox">
+                            <input type="checkbox">
+                            <i class="fa-regular fa-square-check"></i>
+                            <i class="fa-regular fa-square"></i>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="dateText">01.12.2023</span>
+                    </td>
+                    <td>
+                        <span>82.1kg</span>
+                    </td>
+                    <td>
+                        <div class="tdContainer">
+                            <div class="interactionMenu">
+                                <i class="fa-solid fa-ellipsis"></i>
+                                <div class="interactionButtons panel">
+                                    <button onclick="openPopup()"><i class="fa-regular fa-pen-to-square"></i></button>
+                                    <button><i class="fa-solid fa-trash-can"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <div class="checkBox">
+                            <input type="checkbox">
+                            <i class="fa-regular fa-square-check"></i>
+                            <i class="fa-regular fa-square"></i>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="dateText">01.12.2023</span>
+                    </td>
+                    <td>
+                        <span>82.1kg</span>
+                    </td>
+                    <td>
+                        <div class="tdContainer">
+                            <div class="interactionMenu">
+                                <i class="fa-solid fa-ellipsis"></i>
+                                <div class="interactionButtons panel">
+                                    <button onclick="openPopup()"><i class="fa-regular fa-pen-to-square"></i></button>
+                                    <button><i class="fa-solid fa-trash-can"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <div class="checkBox">
+                            <input type="checkbox">
+                            <i class="fa-regular fa-square-check"></i>
+                            <i class="fa-regular fa-square"></i>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="dateText">01.12.2023</span>
+                    </td>
+                    <td>
+                        <span>82.1kg</span>
+                    </td>
+                    <td>
+                        <div class="tdContainer">
+                            <div class="interactionMenu">
+                                <i class="fa-solid fa-ellipsis"></i>
+                                <div class="interactionButtons panel">
+                                    <button onclick="openPopup()"><i class="fa-regular fa-pen-to-square"></i></button>
+                                    <button><i class="fa-solid fa-trash-can"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <div class="checkBox">
+                            <input type="checkbox">
+                            <i class="fa-regular fa-square-check"></i>
+                            <i class="fa-regular fa-square"></i>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="dateText">01.12.2023</span>
+                    </td>
+                    <td>
+                        <span>82.1kg</span>
+                    </td>
+                    <td>
+                        <div class="tdContainer">
+                            <div class="interactionMenu">
+                                <i class="fa-solid fa-ellipsis"></i>
+                                <div class="interactionButtons panel">
+                                    <button onclick="openPopup()"><i class="fa-regular fa-pen-to-square"></i></button>
+                                    <button><i class="fa-solid fa-trash-can"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <div class="checkBox">
+                            <input type="checkbox">
+                            <i class="fa-regular fa-square-check"></i>
+                            <i class="fa-regular fa-square"></i>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="dateText">01.12.2023</span>
+                    </td>
+                    <td>
+                        <span>82.1kg</span>
+                    </td>
+                    <td>
+                        <div class="tdContainer">
+                            <div class="interactionMenu">
+                                <i class="fa-solid fa-ellipsis"></i>
+                                <div class="interactionButtons panel">
+                                    <button onclick="openPopup()"><i class="fa-regular fa-pen-to-square"></i></button>
+                                    <button><i class="fa-solid fa-trash-can"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <div class="checkBox">
+                            <input type="checkbox">
+                            <i class="fa-regular fa-square-check"></i>
+                            <i class="fa-regular fa-square"></i>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="dateText">01.12.2023</span>
+                    </td>
+                    <td>
+                        <span>82.1kg</span>
+                    </td>
+                    <td>
+                        <div class="tdContainer">
+                            <div class="interactionMenu">
+                                <i class="fa-solid fa-ellipsis"></i>
+                                <div class="interactionButtons panel">
+                                    <button onclick="openPopup()"><i class="fa-regular fa-pen-to-square"></i></button>
+                                    <button><i class="fa-solid fa-trash-can"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <div class="checkBox">
+                            <input type="checkbox">
+                            <i class="fa-regular fa-square-check"></i>
+                            <i class="fa-regular fa-square"></i>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="dateText">01.12.2023</span>
+                    </td>
+                    <td>
+                        <span>82.1kg</span>
+                    </td>
+                    <td>
+                        <div class="tdContainer">
+                            <div class="interactionMenu">
+                                <i class="fa-solid fa-ellipsis"></i>
+                                <div class="interactionButtons panel">
+                                    <button onclick="openPopup()"><i class="fa-regular fa-pen-to-square"></i></button>
+                                    <button><i class="fa-solid fa-trash-can"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <div class="checkBox">
+                            <input type="checkbox">
+                            <i class="fa-regular fa-square-check"></i>
+                            <i class="fa-regular fa-square"></i>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="dateText">01.12.2023</span>
+                    </td>
+                    <td>
+                        <span>82.1kg</span>
+                    </td>
+                    <td>
+                        <div class="tdContainer">
+                            <div class="interactionMenu">
+                                <i class="fa-solid fa-ellipsis"></i>
+                                <div class="interactionButtons panel">
+                                    <button onclick="openPopup()"><i class="fa-regular fa-pen-to-square"></i></button>
+                                    <button><i class="fa-solid fa-trash-can"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <div class="checkBox">
+                            <input type="checkbox">
+                            <i class="fa-regular fa-square-check"></i>
+                            <i class="fa-regular fa-square"></i>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="dateText">01.12.2023</span>
+                    </td>
+                    <td>
+                        <span>82.1kg</span>
+                    </td>
+                    <td>
+                        <div class="tdContainer">
+                            <div class="interactionMenu">
+                                <i class="fa-solid fa-ellipsis"></i>
+                                <div class="interactionButtons panel">
+                                    <button onclick="openPopup()"><i class="fa-regular fa-pen-to-square"></i></button>
+                                    <button><i class="fa-solid fa-trash-can"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <div class="checkBox">
+                            <input type="checkbox">
+                            <i class="fa-regular fa-square-check"></i>
+                            <i class="fa-regular fa-square"></i>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="dateText">01.12.2023</span>
+                    </td>
+                    <td>
+                        <span>82.1kg</span>
+                    </td>
+                    <td>
+                        <div class="tdContainer">
+                            <div class="interactionMenu">
+                                <i class="fa-solid fa-ellipsis"></i>
+                                <div class="interactionButtons panel">
+                                    <button onclick="openPopup()"><i class="fa-regular fa-pen-to-square"></i></button>
+                                    <button><i class="fa-solid fa-trash-can"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <div class="checkBox">
+                            <input type="checkbox">
+                            <i class="fa-regular fa-square-check"></i>
+                            <i class="fa-regular fa-square"></i>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="dateText">01.12.2023</span>
+                    </td>
+                    <td>
+                        <span>82.1kg</span>
+                    </td>
+                    <td>
+                        <div class="tdContainer">
+                            <div class="interactionMenu">
+                                <i class="fa-solid fa-ellipsis"></i>
+                                <div class="interactionButtons panel">
+                                    <button onclick="openPopup()"><i class="fa-regular fa-pen-to-square"></i></button>
+                                    <button><i class="fa-solid fa-trash-can"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <div class="checkBox">
+                            <input type="checkbox">
+                            <i class="fa-regular fa-square-check"></i>
+                            <i class="fa-regular fa-square"></i>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="dateText">01.12.2023</span>
+                    </td>
+                    <td>
+                        <span>82.1kg</span>
+                    </td>
+                    <td>
+                        <div class="tdContainer">
+                            <div class="interactionMenu">
+                                <i class="fa-solid fa-ellipsis"></i>
+                                <div class="interactionButtons panel">
+                                    <button onclick="openPopup()"><i class="fa-regular fa-pen-to-square"></i></button>
+                                    <button><i class="fa-solid fa-trash-can"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <div class="checkBox">
+                            <input type="checkbox">
+                            <i class="fa-regular fa-square-check"></i>
+                            <i class="fa-regular fa-square"></i>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="dateText">01.12.2023</span>
+                    </td>
+                    <td>
+                        <span>82.1kg</span>
+                    </td>
+                    <td>
+                        <div class="tdContainer">
+                            <div class="interactionMenu">
+                                <i class="fa-solid fa-ellipsis"></i>
+                                <div class="interactionButtons panel">
+                                    <button onclick="openPopup()"><i class="fa-regular fa-pen-to-square"></i></button>
+                                    <button><i class="fa-solid fa-trash-can"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <div class="checkBox">
+                            <input type="checkbox">
+                            <i class="fa-regular fa-square-check"></i>
+                            <i class="fa-regular fa-square"></i>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="dateText">01.12.2023</span>
+                    </td>
+                    <td>
+                        <span>82.1kg</span>
+                    </td>
+                    <td>
+                        <div class="tdContainer">
+                            <div class="interactionMenu">
+                                <i class="fa-solid fa-ellipsis"></i>
+                                <div class="interactionButtons panel">
+                                    <button onclick="openPopup()"><i class="fa-regular fa-pen-to-square"></i></button>
+                                    <button><i class="fa-solid fa-trash-can"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <div class="checkBox">
+                            <input type="checkbox">
+                            <i class="fa-regular fa-square-check"></i>
+                            <i class="fa-regular fa-square"></i>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="dateText">01.12.2023</span>
+                    </td>
+                    <td>
+                        <span>82.1kg</span>
+                    </td>
+                    <td>
+                        <div class="tdContainer">
+                            <div class="interactionMenu">
+                                <i class="fa-solid fa-ellipsis"></i>
+                                <div class="interactionButtons panel">
+                                    <button onclick="openPopup()"><i class="fa-regular fa-pen-to-square"></i></button>
+                                    <button><i class="fa-solid fa-trash-can"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <div class="checkBox">
+                            <input type="checkbox">
+                            <i class="fa-regular fa-square-check"></i>
+                            <i class="fa-regular fa-square"></i>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="dateText">01.12.2023</span>
+                    </td>
+                    <td>
+                        <span>82.1kg</span>
+                    </td>
+                    <td>
+                        <div class="tdContainer">
+                            <div class="interactionMenu">
+                                <i class="fa-solid fa-ellipsis"></i>
+                                <div class="interactionButtons panel">
+                                    <button onclick="openPopup()"><i class="fa-regular fa-pen-to-square"></i></button>
+                                    <button><i class="fa-solid fa-trash-can"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <div class="checkBox">
+                            <input type="checkbox">
+                            <i class="fa-regular fa-square-check"></i>
+                            <i class="fa-regular fa-square"></i>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="dateText">01.12.2023</span>
+                    </td>
+                    <td>
+                        <span>82.1kg</span>
+                    </td>
+                    <td>
+                        <div class="tdContainer">
+                            <div class="interactionMenu">
+                                <i class="fa-solid fa-ellipsis"></i>
+                                <div class="interactionButtons panel">
+                                    <button onclick="openPopup()"><i class="fa-regular fa-pen-to-square"></i></button>
+                                    <button><i class="fa-solid fa-trash-can"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <div class="checkBox">
+                            <input type="checkbox">
+                            <i class="fa-regular fa-square-check"></i>
+                            <i class="fa-regular fa-square"></i>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="dateText">01.12.2023</span>
+                    </td>
+                    <td>
+                        <span>82.1kg</span>
+                    </td>
+                    <td>
+                        <div class="tdContainer">
+                            <div class="interactionMenu">
+                                <i class="fa-solid fa-ellipsis"></i>
+                                <div class="interactionButtons panel">
+                                    <button onclick="openPopup()"><i class="fa-regular fa-pen-to-square"></i></button>
+                                    <button><i class="fa-solid fa-trash-can"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <div class="checkBox">
+                            <input type="checkbox">
+                            <i class="fa-regular fa-square-check"></i>
+                            <i class="fa-regular fa-square"></i>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="dateText">01.12.2023</span>
+                    </td>
+                    <td>
+                        <span>82.1kg</span>
+                    </td>
+                    <td>
+                        <div class="tdContainer">
+                            <div class="interactionMenu">
+                                <i class="fa-solid fa-ellipsis"></i>
+                                <div class="interactionButtons panel">
+                                    <button onclick="openPopup()"><i class="fa-regular fa-pen-to-square"></i></button>
+                                    <button><i class="fa-solid fa-trash-can"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <div class="checkBox">
+                            <input type="checkbox">
+                            <i class="fa-regular fa-square-check"></i>
+                            <i class="fa-regular fa-square"></i>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="dateText">01.12.2023</span>
+                    </td>
+                    <td>
+                        <span>82.1kg</span>
+                    </td>
+                    <td>
+                        <div class="tdContainer">
+                            <div class="interactionMenu">
+                                <i class="fa-solid fa-ellipsis"></i>
+                                <div class="interactionButtons panel">
+                                    <button onclick="openPopup()"><i class="fa-regular fa-pen-to-square"></i></button>
+                                    <button><i class="fa-solid fa-trash-can"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <div class="checkBox">
+                            <input type="checkbox">
+                            <i class="fa-regular fa-square-check"></i>
+                            <i class="fa-regular fa-square"></i>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="dateText">01.12.2023</span>
+                    </td>
+                    <td>
+                        <span>82.1kg</span>
+                    </td>
+                    <td>
+                        <div class="tdContainer">
+                            <div class="interactionMenu">
+                                <i class="fa-solid fa-ellipsis"></i>
+                                <div class="interactionButtons panel">
+                                    <button onclick="openPopup()"><i class="fa-regular fa-pen-to-square"></i></button>
+                                    <button><i class="fa-solid fa-trash-can"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <div class="checkBox">
+                            <input type="checkbox">
+                            <i class="fa-regular fa-square-check"></i>
+                            <i class="fa-regular fa-square"></i>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="dateText">01.12.2023</span>
+                    </td>
+                    <td>
+                        <span>82.1kg</span>
+                    </td>
+                    <td>
+                        <div class="tdContainer">
+                            <div class="interactionMenu">
+                                <i class="fa-solid fa-ellipsis"></i>
+                                <div class="interactionButtons panel">
+                                    <button onclick="openPopup()"><i class="fa-regular fa-pen-to-square"></i></button>
+                                    <button><i class="fa-solid fa-trash-can"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <div class="checkBox">
+                            <input type="checkbox">
+                            <i class="fa-regular fa-square-check"></i>
+                            <i class="fa-regular fa-square"></i>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="dateText">01.12.2023</span>
+                    </td>
+                    <td>
+                        <span>82.1kg</span>
+                    </td>
+                    <td>
+                        <div class="tdContainer">
+                            <div class="interactionMenu">
+                                <i class="fa-solid fa-ellipsis"></i>
+                                <div class="interactionButtons panel">
+                                    <button onclick="openPopup()"><i class="fa-regular fa-pen-to-square"></i></button>
+                                    <button><i class="fa-solid fa-trash-can"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <div class="checkBox">
+                            <input type="checkbox">
+                            <i class="fa-regular fa-square-check"></i>
+                            <i class="fa-regular fa-square"></i>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="dateText">01.12.2023</span>
+                    </td>
+                    <td>
+                        <span>82.1kg</span>
+                    </td>
+                    <td>
+                        <div class="tdContainer">
+                            <div class="interactionMenu">
+                                <i class="fa-solid fa-ellipsis"></i>
+                                <div class="interactionButtons panel">
+                                    <button onclick="openPopup()"><i class="fa-regular fa-pen-to-square"></i></button>
+                                    <button><i class="fa-solid fa-trash-can"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <div class="checkBox">
+                            <input type="checkbox">
+                            <i class="fa-regular fa-square-check"></i>
+                            <i class="fa-regular fa-square"></i>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="dateText">01.12.2023</span>
+                    </td>
+                    <td>
+                        <span>82.1kg</span>
+                    </td>
+                    <td>
+                        <div class="tdContainer">
+                            <div class="interactionMenu">
+                                <i class="fa-solid fa-ellipsis"></i>
+                                <div class="interactionButtons panel">
+                                    <button onclick="openPopup()"><i class="fa-regular fa-pen-to-square"></i></button>
+                                    <button><i class="fa-solid fa-trash-can"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <div class="checkBox">
+                            <input type="checkbox">
+                            <i class="fa-regular fa-square-check"></i>
+                            <i class="fa-regular fa-square"></i>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="dateText">01.12.2023</span>
+                    </td>
+                    <td>
+                        <span>82.1kg</span>
+                    </td>
+                    <td>
+                        <div class="tdContainer">
+                            <div class="interactionMenu">
+                                <i class="fa-solid fa-ellipsis"></i>
+                                <div class="interactionButtons panel">
+                                    <button onclick="openPopup()"><i class="fa-regular fa-pen-to-square"></i></button>
+                                    <button><i class="fa-solid fa-trash-can"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <div class="checkBox">
+                            <input type="checkbox">
+                            <i class="fa-regular fa-square-check"></i>
+                            <i class="fa-regular fa-square"></i>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="dateText">01.12.2023</span>
+                    </td>
+                    <td>
+                        <span>82.1kg</span>
+                    </td>
+                    <td>
+                        <div class="tdContainer">
+                            <div class="interactionMenu">
+                                <i class="fa-solid fa-ellipsis"></i>
+                                <div class="interactionButtons panel">
+                                    <button onclick="openPopup()"><i class="fa-regular fa-pen-to-square"></i></button>
+                                    <button><i class="fa-solid fa-trash-can"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <div class="checkBox">
+                            <input type="checkbox">
+                            <i class="fa-regular fa-square-check"></i>
+                            <i class="fa-regular fa-square"></i>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="dateText">01.12.2023</span>
+                    </td>
+                    <td>
+                        <span>82.1kg</span>
+                    </td>
+                    <td>
+                        <div class="tdContainer">
+                            <div class="interactionMenu">
+                                <i class="fa-solid fa-ellipsis"></i>
+                                <div class="interactionButtons panel">
+                                    <button onclick="openPopup()"><i class="fa-regular fa-pen-to-square"></i></button>
+                                    <button><i class="fa-solid fa-trash-can"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <div class="checkBox">
+                            <input type="checkbox">
+                            <i class="fa-regular fa-square-check"></i>
+                            <i class="fa-regular fa-square"></i>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="dateText">01.12.2023</span>
+                    </td>
+                    <td>
+                        <span>82.1kg</span>
+                    </td>
+                    <td>
+                        <div class="tdContainer">
+                            <div class="interactionMenu">
+                                <i class="fa-solid fa-ellipsis"></i>
+                                <div class="interactionButtons panel">
+                                    <button onclick="openPopup()"><i class="fa-regular fa-pen-to-square"></i></button>
+                                    <button><i class="fa-solid fa-trash-can"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <div class="checkBox">
+                            <input type="checkbox">
+                            <i class="fa-regular fa-square-check"></i>
+                            <i class="fa-regular fa-square"></i>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="dateText">01.12.2023</span>
+                    </td>
+                    <td>
+                        <span>82.1kg</span>
+                    </td>
+                    <td>
+                        <div class="tdContainer">
+                            <div class="interactionMenu">
+                                <i class="fa-solid fa-ellipsis"></i>
+                                <div class="interactionButtons panel">
+                                    <button onclick="openPopup()"><i class="fa-regular fa-pen-to-square"></i></button>
+                                    <button><i class="fa-solid fa-trash-can"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <div class="checkBox">
+                            <input type="checkbox">
+                            <i class="fa-regular fa-square-check"></i>
+                            <i class="fa-regular fa-square"></i>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="dateText">01.12.2023</span>
+                    </td>
+                    <td>
+                        <span>82.1kg</span>
+                    </td>
+                    <td>
+                        <div class="tdContainer">
+                            <div class="interactionMenu">
+                                <i class="fa-solid fa-ellipsis"></i>
+                                <div class="interactionButtons panel">
+                                    <button onclick="openPopup()"><i class="fa-regular fa-pen-to-square"></i></button>
+                                    <button><i class="fa-solid fa-trash-can"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <div class="checkBox">
+                            <input type="checkbox">
+                            <i class="fa-regular fa-square-check"></i>
+                            <i class="fa-regular fa-square"></i>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="dateText">01.12.2023</span>
+                    </td>
+                    <td>
+                        <span>82.1kg</span>
+                    </td>
+                    <td>
+                        <div class="tdContainer">
+                            <div class="interactionMenu">
+                                <i class="fa-solid fa-ellipsis"></i>
+                                <div class="interactionButtons panel">
+                                    <button onclick="openPopup()"><i class="fa-regular fa-pen-to-square"></i></button>
+                                    <button><i class="fa-solid fa-trash-can"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <div class="checkBox">
+                            <input type="checkbox">
+                            <i class="fa-regular fa-square-check"></i>
+                            <i class="fa-regular fa-square"></i>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="dateText">01.12.2023</span>
+                    </td>
+                    <td>
+                        <span>82.1kg</span>
+                    </td>
+                    <td>
+                        <div class="tdContainer">
+                            <div class="interactionMenu">
+                                <i class="fa-solid fa-ellipsis"></i>
+                                <div class="interactionButtons panel">
+                                    <button onclick="openPopup()"><i class="fa-regular fa-pen-to-square"></i></button>
+                                    <button><i class="fa-solid fa-trash-can"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <div class="checkBox">
+                            <input type="checkbox">
+                            <i class="fa-regular fa-square-check"></i>
+                            <i class="fa-regular fa-square"></i>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="dateText">01.12.2023</span>
+                    </td>
+                    <td>
+                        <span>82.1kg</span>
+                    </td>
+                    <td>
+                        <div class="tdContainer">
+                            <div class="interactionMenu">
+                                <i class="fa-solid fa-ellipsis"></i>
+                                <div class="interactionButtons panel">
+                                    <button onclick="openPopup()"><i class="fa-regular fa-pen-to-square"></i></button>
+                                    <button><i class="fa-solid fa-trash-can"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <div class="checkBox">
+                            <input type="checkbox">
+                            <i class="fa-regular fa-square-check"></i>
+                            <i class="fa-regular fa-square"></i>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="dateText">01.12.2023</span>
+                    </td>
+                    <td>
+                        <span>82.1kg</span>
+                    </td>
+                    <td>
+                        <div class="tdContainer">
+                            <div class="interactionMenu">
+                                <i class="fa-solid fa-ellipsis"></i>
+                                <div class="interactionButtons panel">
+                                    <button onclick="openPopup()"><i class="fa-regular fa-pen-to-square"></i></button>
+                                    <button><i class="fa-solid fa-trash-can"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <div class="checkBox">
+                            <input type="checkbox">
+                            <i class="fa-regular fa-square-check"></i>
+                            <i class="fa-regular fa-square"></i>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="dateText">01.12.2023</span>
+                    </td>
+                    <td>
+                        <span>82.1kg</span>
+                    </td>
+                    <td>
+                        <div class="tdContainer">
+                            <div class="interactionMenu">
+                                <i class="fa-solid fa-ellipsis"></i>
+                                <div class="interactionButtons panel">
+                                    <button onclick="openPopup()"><i class="fa-regular fa-pen-to-square"></i></button>
+                                    <button><i class="fa-solid fa-trash-can"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <div class="checkBox">
+                            <input type="checkbox">
+                            <i class="fa-regular fa-square-check"></i>
+                            <i class="fa-regular fa-square"></i>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="dateText">01.12.2023</span>
+                    </td>
+                    <td>
+                        <span>82.1kg</span>
+                    </td>
+                    <td>
+                        <div class="tdContainer">
+                            <div class="interactionMenu">
+                                <i class="fa-solid fa-ellipsis"></i>
+                                <div class="interactionButtons panel">
+                                    <button onclick="openPopup()"><i class="fa-regular fa-pen-to-square"></i></button>
+                                    <button><i class="fa-solid fa-trash-can"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <div class="checkBox">
+                            <input type="checkbox">
+                            <i class="fa-regular fa-square-check"></i>
+                            <i class="fa-regular fa-square"></i>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="dateText">01.12.2023</span>
+                    </td>
+                    <td>
+                        <span>82.1kg</span>
+                    </td>
+                    <td>
+                        <div class="tdContainer">
+                            <div class="interactionMenu">
+                                <i class="fa-solid fa-ellipsis"></i>
+                                <div class="interactionButtons panel">
+                                    <button onclick="openPopup()"><i class="fa-regular fa-pen-to-square"></i></button>
+                                    <button><i class="fa-solid fa-trash-can"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <div class="checkBox">
+                            <input type="checkbox">
+                            <i class="fa-regular fa-square-check"></i>
+                            <i class="fa-regular fa-square"></i>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="dateText">01.12.2023</span>
+                    </td>
+                    <td>
+                        <span>82.1kg</span>
+                    </td>
+                    <td>
+                        <div class="tdContainer">
+                            <div class="interactionMenu">
+                                <i class="fa-solid fa-ellipsis"></i>
+                                <div class="interactionButtons panel">
+                                    <button onclick="openPopup()"><i class="fa-regular fa-pen-to-square"></i></button>
+                                    <button><i class="fa-solid fa-trash-can"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="logic.js"></script>
+<script src="scrollCardBox.js"></script>
+</body>
+</html>

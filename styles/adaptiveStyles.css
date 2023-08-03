@@ -1,0 +1,32 @@
+@media screen and (max-width: 1200px) {
+    .main {
+        flex-direction: column;
+    }
+
+    .statsBox{
+        width: 100% !important;
+        min-height: 724px;
+    }
+
+    .recordsBox {
+        width: 100% !important;
+    }
+
+    .recordsTable td:first-child, .recordsTable th:first-child {
+        width: 55px;
+    }
+
+    .recordsTable tbody {
+        min-height: 540px !important;
+        height: 52dvh !important;
+    }
+
+    .popupBox{
+        width: 97% !important;
+        height: 69%;
+    }
+
+    .popup {
+        padding: 1% !important;
+    }
+}
