@@ -54,23 +54,28 @@ body {
 
 .statsBox {
     min-width: 650px;
+    min-height: 828px;
     height: 100%;
     width: 60%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 7%;
+    gap: 30px;
+    box-sizing: border-box;
+    padding-bottom: 2%;
 }
 
 .recordsBox {
+    min-height: 828px;
     height: 100%;
     min-width: 352px;
     width: 27%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: start;
     gap: 30px;
+    box-sizing: border-box;
+    padding-bottom: 2%;
 }
 
 .currentProgressBox {
@@ -88,7 +93,7 @@ body {
     position: relative;
     width: 100%;
     min-height: 185px;
-    height: 24%;
+    height: 33%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
