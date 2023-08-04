@@ -18,15 +18,40 @@
 
     .recordsTable tbody {
         min-height: 540px !important;
-        height: 52dvh !important;
-    }
-
-    .popupBox{
-        width: 97% !important;
-        height: 69%;
+        height: 20dvh !important;
     }
 
     .popup {
         padding: 1% !important;
+    }
+
+    .tableBox{
+        height: 80% !important;
+    }
+}
+
+@media screen and (max-width: 650px){
+    .popup {
+        padding: 2.5% !important;
+    }
+
+    .statsBox {
+        min-width: 330px;
+    }
+
+    .cardBox {
+        gap: 34px 15px !important;
+    }
+
+    .sectionHeader {
+        font-size: 22px !important;
+    }
+
+    .card, .progressCard{
+        padding: 2.5% !important;
+    }
+
+    .actionBox button {
+        font-size: 15px !important;
     }
 }

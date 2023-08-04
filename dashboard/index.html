@@ -50,7 +50,7 @@
             <div class="chart panel">
                 <canvas id="chart"></canvas>
             </div>
-            <div class="cardBox">
+            <div class="cardBox" id="currentStatsCards" data-row-index="0">
                 <div class="card panel">
                     <div class="iconBox iconBlue">
                         <i class="fa-regular fa-weight-scale"></i>
@@ -80,10 +80,17 @@
                     <span class="cardValue dateText">03.01.2023</span>
                 </div>
             </div>
+            <div class="switches">
+                <div class="buttons panel">
+                    <button onclick="scrollUp('currentStatsCards')"><i class="fa-solid fa-chevron-up" id="switchUp"></i></button>
+                    <span>1</span>
+                    <button onclick="scrollDown('currentStatsCards')"><i class="fa-solid fa-chevron-down" id="switchDown"></i></button>
+                </div>
+            </div>
         </div>
         <div class="goalStatsBox">
             <span class="sectionHeader">Статистика цели и прогресс</span>
-            <div class="cardBox" id="goalStatsCards">
+            <div class="cardBox" id="goalStatsCards" data-row-index="0">
                 <div class="card panel">
                     <div class="iconBox iconOrange">
                         <i class="fa-regular fa-bullseye-arrow"></i>
@@ -156,9 +163,9 @@
             </div>
             <div class="switches">
                 <div class="buttons panel">
-                    <button onclick="scrollUp()"><i class="fa-solid fa-chevron-up" id="switchUp"></i></button>
+                    <button onclick="scrollUp('goalStatsCards')"><i class="fa-solid fa-chevron-up" id="switchUp"></i></button>
                     <span>1</span>
-                    <button onclick="scrollDown()"><i class="fa-solid fa-chevron-down" id="switchDown"></i></button>
+                    <button onclick="scrollDown('goalStatsCards')"><i class="fa-solid fa-chevron-down" id="switchDown"></i></button>
                 </div>
             </div>
         </div>

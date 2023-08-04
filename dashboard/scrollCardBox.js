@@ -1,52 +1,60 @@
-let currentRawIndex = 0;
-let cards = $("#goalStatsCards").children(".panel:not(.switches)");
-let switches = $(".goalStatsBox").children(".switches").children(".buttons");
-
-switches.children("button").children("i").on("animationend", function () {
+$(".switchers").children(".buttons").children("button").children("i").on("animationend", function () {
     $(this).css("animation", "")
 });
 
-$(window).on("resize", updateRowsCount);
+$(window).on("resize", function(){
+    updateRowsCount("currentStatsCards");
+    updateRowsCount("goalStatsCards");
+});
 
-$(updateRowsCount);
+$(function(){
+    updateRowsCount("currentStatsCards");
+    updateRowsCount("goalStatsCards");
+});
 
-function updateRowsCount() {
-    let rowsCount = getRowsCount();
+function updateRowsCount(id) {
+    let cardsBox = $("#"+id);
+    let rowsCount = getRowsCount(cardsBox.children(".panel"));
+    let switches = cardsBox.siblings(".switches").find(".buttons");
     if (rowsCount === 1) {
         switches.children("button").attr("disabled", "disabled");
     } else {
         switches.children("button").removeAttr("disabled");
     }
-    if (currentRawIndex >= rowsCount) {
-        scroll(-1);
+    if (cardsBox.attr("data-row-index") >= rowsCount) {
+        scroll(-1, id);
     }
 }
 
-function scrollDown() {
-    scroll(1);
+function scrollDown(id) {
+    scroll(1, id);
 }
 
-function scrollUp() {
-    scroll(-1);
+function scrollUp(id) {
+    scroll(-1, id);
 }
 
-function scroll(multiplier) {
-    let currentRawCount = getRowsCount();
-    if (currentRawIndex < clamp(currentRawIndex + multiplier, 0, currentRawCount - 1)) {
-        $("#switchDown").css("animation", "0.5s ease-in-out switchDown");
+function scroll(multiplier, id) {
+    let currentBox = $("#"+id);
+    let cards = currentBox.children(".panel");
+    let currentRawCount = getRowsCount(cards);
+    let currentRowIndex = parseInt(currentBox.attr("data-row-index"));
+    if (currentRowIndex < clamp(currentRowIndex + multiplier, 0, currentRawCount - 1)) {
+        currentBox.siblings(".switches").find(".fa-chevron-down").css("animation", "0.5s ease-in-out switchDown");
     } else {
-        $("#switchUp").css("animation", "0.5s ease-in-out switchUp");
+        currentBox.siblings(".switches").find(".fa-chevron-up").css("animation", "0.5s ease-in-out switchUp");
     }
-    currentRawIndex = clamp(currentRawIndex + multiplier, 0, currentRawCount - 1)
+    currentRowIndex = clamp(currentRowIndex + multiplier, 0, currentRawCount - 1)
 
     for (let card of cards) {
-        $(card).css("transform", "translate(0," + -125* currentRawIndex + "%)");
+        $(card).css("transform", "translate(0," + -125 * currentRowIndex + "%)");
     }
 
-    switches.children("span").text(currentRawIndex+1);
+    currentBox.siblings(".switches").find("span").text(currentRowIndex + 1);
+    currentBox.attr("data-row-index", currentRowIndex);
 }
 
-function getRowsCount() {
+function getRowsCount(cards) {
     let currentRowCount = 1;
     for (let i = 0; i < cards.length; i++) {
         if (i !== 0 && cards[i].offsetTop !== cards[i - 1].offsetTop) currentRowCount++;

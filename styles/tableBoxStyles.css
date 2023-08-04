@@ -4,16 +4,19 @@
     min-height: 660px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: start;
+    position: relative;
 }
 
 .actionBox {
     width: 100%;
+    max-height: 76px;
+    min-height: 76px;
     height: 76px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 4%;
+    padding: 15px;
     box-sizing: border-box;
 }
 
