@@ -7,6 +7,8 @@
     overflow: hidden;
     flex-wrap: wrap;
     transition: all 0.3s;
+    margin: -15px;
+    padding: 15px;
 }
 
 .cardBox::-webkit-scrollbar{
@@ -83,7 +85,6 @@
     position: relative;
     box-sizing: border-box;
     padding: 1%;
-    height: 100%;
     min-width: 201px;
     width: 201px;
     display: flex;
@@ -131,7 +132,17 @@
 .goalStatsBox:has(.switches > .buttons > button:not(:disabled)) .cardBox .progressCard,
 .currentProgressBox:has(.switches > .buttons > button:not(:disabled)) .cardBox .card,
 .currentProgressBox:has(.switches > .buttons > button:not(:disabled)) .cardBox .progressCard {
-    margin-left: 35px;
+    margin-left: 34px;
+}
+
+.goalStatsBox:has(.switches > .buttons > button:not(:disabled)) .cardBox{
+    gap: 45px 0;
+}
+
+.cardBox .card, .cardBox .progressCard{
+    min-height: 133px;
+    height: 16dvh;
+    max-height: 160px;
 }
 
 .cardBox .card{
@@ -139,13 +150,11 @@
     padding: 1%;
     min-width: 133px;
     width: 133px;
-    min-height: 123px;
-    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: start;
     justify-content: flex-start;
-    gap: 10%;
+    gap: 11%;
     transition: all 0.3s;
 }
 

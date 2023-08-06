@@ -47,7 +47,7 @@ function scroll(multiplier, id) {
     currentRowIndex = clamp(currentRowIndex + multiplier, 0, currentRawCount - 1)
 
     for (let card of cards) {
-        $(card).css("transform", "translate(0," + -125 * currentRowIndex + "%)");
+        $(card).css("transform", "translate(0," + -130 * currentRowIndex + "%)");
     }
 
     currentBox.siblings(".switches").find("span").text(currentRowIndex + 1);

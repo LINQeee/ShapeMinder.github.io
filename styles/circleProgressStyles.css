@@ -1,21 +1,20 @@
 :root {
     --progress-bar-stroke-width: 3.2;
-    --progress-bar-size: 95px;
 }
 
 .progressBar{
     position: absolute;
-    margin-top: 0.5%;
+    margin-top: -7.5%;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: var(--progress-bar-size);
-    height: var(--progress-bar-size);
+    width: 100%;
+    height: 100%;
 }
 
 .progressBar .progressShadow{
     position: absolute;
-    margin-top: 75%;
+    margin-top: 35%;
     width: 81px;
     background: transparent;
     height: 0;
@@ -53,8 +52,8 @@
 }
 
 svg {
-    height: var(--progress-bar-size);
-    width: var(--progress-bar-size);
+    height: 70%;
+    width: 70%;
 }
 
 .progress-bar__background {

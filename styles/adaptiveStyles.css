@@ -1,6 +1,7 @@
 @media screen and (max-width: 1200px) {
     .main {
         flex-direction: column;
+        gap: 1%;
     }
 
     .statsBox{
@@ -24,8 +25,8 @@
         padding: 1% !important;
     }
 
-    .tableBox{
-        height: 80% !important;
+    .cardBox .card, .cardBox .progressCard{
+        height: 14dvh;
     }
 }
 
@@ -43,7 +44,7 @@
     }
 
     .sectionHeader {
-        font-size: 22px !important;
+        font-size: 20px !important;
     }
 
     .card, .progressCard{

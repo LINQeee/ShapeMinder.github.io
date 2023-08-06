@@ -44,7 +44,7 @@ body {
     min-height: 532px;
     height: 100%;
     width: 100%;
-    padding: 0 2.5% 0 2.5%;
+    padding: 2% 2.5% 1.5% 2.5%;
     box-sizing: border-box;
     display: flex;
     justify-content: space-between;
@@ -60,9 +60,8 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 30px;
+    gap: 3%;
     box-sizing: border-box;
-    padding-bottom: 2%;
 }
 
 .recordsBox {
@@ -75,13 +74,13 @@ body {
     align-items: center;
     gap: 30px;
     box-sizing: border-box;
-    padding-bottom: 2%;
+    justify-content: space-between;
 }
 
 .currentProgressBox {
     width: 100%;
     min-height: 475px;
-    height: 67%;
+    height: 71%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -93,11 +92,13 @@ body {
     position: relative;
     width: 100%;
     min-height: 185px;
-    height: 33%;
+    height: 29%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    gap: 8%;
+    justify-content: center;
     align-items: center;
+    box-sizing: border-box;
 }
 
 .panel {
