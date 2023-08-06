@@ -40,7 +40,7 @@
     }
 
     .cardBox {
-        gap: 34px 15px !important;
+        gap: 40px 15px !important;
     }
 
     .sectionHeader {
@@ -53,5 +53,9 @@
 
     .actionBox button {
         font-size: 15px !important;
+    }
+
+    .goalStatsBox {
+        gap: 30px !important;
     }
 }

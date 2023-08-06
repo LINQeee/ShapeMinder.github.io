@@ -1,13 +1,39 @@
+let isChartLoaded = false;
+let isTableLoaded = false;
 const popup = $("#popup");
 const addRecordButton = $("#addRecordButton");
-const russianMonthNames = ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'];
+const shortRussianMonths = ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'];
+const longRussianMonths = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
+const FieldType = {DATE: "#dateInput", WEIGHT: "#weightInput"}
+
+let mainChart;
+let currentEditingRecord;
+let selectedDate;
+
+class inputFieldError {
+    constructor(message, fieldType) {
+        this.message = message;
+        this.fieldType = fieldType;
+    }
+}
 
 $(function () {
     uiSetup();
-    setupRecords();
+    setupStatsAndRecords();
+    loadingFinish();
 });
 
-function setupRecords() {
+function loadingFinish() {
+    if (!isChartLoaded || !isTableLoaded)
+        setTimeout(function () {
+            loadingFinish()
+        }, 100);
+    else
+        $(".loading").css("animation", "0.2s forwards finishLoading");
+
+}
+
+function setupStatsAndRecords() {
     getRecords(function (data) {
         let userDTO = data["userDTO"];
         //* chartCreate
@@ -31,11 +57,13 @@ function updateTable(recordDTOList) {
     let parent = recordsBox.find("tr");
     for (let record of recordDTOList) {
         let copy = parent.clone();
+        copy.attr("data-record-id", record["id"]);
         copy.find(".recordDate").text(new Date(record["date"]).toLocaleDateString("ru-RU"));
         copy.find(".recordWeight").text(record["currentWeight"] + "кг");
         copy.appendTo(recordsBox);
     }
     parent.remove();
+    isTableLoaded = true;
 }
 
 function setupStats(userDTO) {
@@ -61,9 +89,49 @@ function getRecords(handleData) {
     });
 }
 
+function editRecord() {
+    let weightVal = $("#weightInput").val();
+    let dateVal = toJsonFormat($("#dateInput").val());
+    $.ajax({
+        type: "POST",
+        url: "http://89.108.76.24:9092/record",
+        data: JSON.stringify({
+            currentWeight: weightVal,
+            date: dateVal,
+            userId: 1,
+            id: currentEditingRecord["id"]
+        }),
+        contentType: "application/json",
+        success: function (response) {
+            console.log(response);
+            currentEditingRecord = null;
+            setupStatsAndRecords();
+        },
+        error: function (e) {
+            console.log(e);
+        }
+    });
+}
+
+function deleteRecord(button) {
+    let recordId = $(button).closest("tr").attr("data-record-id");
+
+    $.ajax({
+        type: "DELETE",
+        url: "http://89.108.76.24:9092/record?id=" + recordId,
+        success: function (response) {
+            setupStatsAndRecords();
+            console.log(response);
+        },
+        error: function (e) {
+            console.log(e);
+        }
+    });
+}
+
 function createRecord() {
     let weightVal = $("#weightInput").val();
-    let dateVal = new Date($("#dateInput").val()).toISOString().split("T")[0];
+    let dateVal = toJsonFormat($("#dateInput").val());
     $.ajax({
         type: "POST",
         url: "http://89.108.76.24:9092/record",
@@ -74,6 +142,7 @@ function createRecord() {
         }),
         contentType: "application/json",
         success: function (response) {
+            setupStatsAndRecords();
             console.log(response);
         },
         error: function (e) {
@@ -82,22 +151,57 @@ function createRecord() {
     });
 }
 
+function validateInputs() {
+    let dateInputVal = $("#dateInput").val();
+    let weightInputVal = $("#weightInput").val();
+    let fieldsErrors = [];
+    if (dateInputVal === "") {
+        fieldsErrors.push(new inputFieldError("Укажите дату!", FieldType.DATE));
+    } else if (!Date.parse(toJsonFormat(dateInputVal))) {
+        fieldsErrors.push(new inputFieldError("Дата должна быть формата дд-мм-гггг!", FieldType.DATE));
+    }
+
+    if (weightInputVal === "") {
+        fieldsErrors.push(new inputFieldError("Укажите вес!", FieldType.WEIGHT));
+    }
+    return fieldsErrors;
+}
+
 function openCreateRecordPopup() {
     $("#dateInput").datepicker("setDate", new Date());
     $("#weightInput").val("");
     openPopup();
 }
 
+function openEditRecordPopup(button) {
+    let tableRecord = $(button).closest("tr");
+    let currentWeight = tableRecord.find(".recordWeight").text();
+    currentWeight = currentWeight.slice(0, currentWeight.length - 2);
+    console.log(currentWeight);
+    currentEditingRecord = {
+        id: tableRecord.attr("data-record-id"),
+        date: tableRecord.find(".recordDate").text().replaceAll(".", "-"),
+        currentWeight: currentWeight,
+        userId: 1
+    };
+
+    $("#dateInput").val(currentEditingRecord["date"]);
+    $("#weightInput").val(currentEditingRecord["currentWeight"]);
+
+    openPopup();
+}
+
 function uiSetup() {
-    $(".submit").on("click", function () {
+    let submitButtons = $(".submit");
+    submitButtons.on("click", function () {
+        $(this).attr("disabled", "disabled")
         $(this).css("animation", "0.8s ease-in-out submitButton")
             .children(".fa-check")
             .css("animation", "0.8s ease-in-out submitCheck");
     });
 
-    $(".submit").on("animationend", function () {
-        $(this).attr("disabled", "disabled")
-            .css("animation", "")
+    submitButtons.on("animationend", function () {
+        $(this).css("animation", "")
             .children(".fa-check")
             .css("animation", "");
     });
@@ -110,8 +214,8 @@ function uiSetup() {
         prevText: 'Предыдущий',
         nextText: 'Следующий',
         currentText: 'Сегодня',
-        monthNames: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
-        monthNamesShort: russianMonthNames,
+        monthNames: longRussianMonths,
+        monthNamesShort: shortRussianMonths,
         dayNames: ['воскресенье', 'понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота'],
         dayNamesShort: ['вск', 'пнд', 'втр', 'срд', 'чтв', 'птн', 'сбт'],
         dayNamesMin: ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'],
@@ -119,27 +223,48 @@ function uiSetup() {
         firstDay: 1,
         isRTL: false,
         showMonthAfterYear: false,
-        yearSuffix: ''
+        yearSuffix: '',
+        onSelect: function () {
+            $(this).parent().removeClass("error");
+            selectedDate = $(this).val();
+        }
     });
 
     $('#dateInput').datepicker("setDate", new Date());
 }
 
 function openPopup() {
+    $("#dateInput").parent().removeClass("error");
+    $("#weightInput").parent().removeClass("error");
+    $("#saveButton").removeAttr("disabled");
     popup.css("animation", "0.3s ease-in-out forwards showPopup");
 }
 
 function closePopup() {
+    currentEditingRecord = null;
     popup.css("animation", "0.3s ease-in-out forwards hidePopup");
     addRecordButton.removeAttr("disabled");
 }
 
 async function save() {
-    createRecord();
+    let saveButton = $("#saveButton");
+    let fieldErrors = validateInputs();
+    if (fieldErrors.length > 0) {
+        for (let error of fieldErrors) {
+            let input = $(error["fieldType"]);
+            input.siblings("span").text(error["message"]);
+            input.parent().addClass("error");
+        }
+        await sleep(100);
+        saveButton.removeAttr("disabled");
+        return;
+    }
+    if (currentEditingRecord != null) editRecord();
+    else createRecord();
     await sleep(900);
     closePopup();
     await sleep(100);
-    $("#saveButton").removeAttr("disabled");
+    saveButton.removeAttr("disabled");
 }
 
 function initChart(weightList, datesList) {
@@ -150,7 +275,7 @@ function initChart(weightList, datesList) {
     Chart.defaults.font.family = "Montserrat";
     const ctx = $("#chart");
 
-    const totalDuration = 1000;
+    const totalDuration = data.length * 50;
     const delayBetweenPoints = totalDuration / data.length;
     const previousY = (ctx) => ctx.index === 0 ? ctx.chart.scales.y.getPixelForValue(100) : ctx.chart.getDatasetMeta(ctx.datasetIndex).data[ctx.index - 1].getProps(['y'], true).y;
     const animation = {
@@ -158,7 +283,7 @@ function initChart(weightList, datesList) {
             type: 'number',
             easing: 'linear',
             duration: delayBetweenPoints,
-            from: NaN, // the point is initially skipped
+            from: NaN,
             delay(ctx) {
                 if (ctx.type !== 'data' || ctx.xStarted) {
                     return 0;
@@ -186,7 +311,7 @@ function initChart(weightList, datesList) {
         type: 'line',
         data: {
             datasets: [{
-                label: 'My First Dataset',
+                label: 'Вес',
                 data: data,
                 fill: false,
                 borderColor: '#4C2DFE',
@@ -199,13 +324,25 @@ function initChart(weightList, datesList) {
             responsive: true,
             maintainAspectRatio: false,
             elements: {
-              point: {
-                  hitRadius: 10
-              }
+                point: {
+                    hitRadius: 10
+                }
             },
             plugins: {
                 legend: {
                     display: false,
+                },
+                tooltip: {
+                    callbacks: {
+                        title: function (value) {
+                            return longMonthFromDay(value[0]["label"]);
+                        },
+                        label: function (value) {
+                            return value["dataset"]["label"] + ": " + value["formattedValue"] + "кг";
+                        }
+                    },
+                    displayColors: false,
+                    backgroundColor: "#100C46"
                 }
             },
             layout: {
@@ -242,26 +379,36 @@ function initChart(weightList, datesList) {
                         },
 
                         callback: function (value) {
-                            return monthFromDay(value);
+                            return shortMonthFromDay(value);
                         }
                     }
                 }
             }
         },
     };
+    isChartLoaded = true;
 
-    new Chart(ctx, config);
+    if (mainChart != null) mainChart.destroy();
+    mainChart = new Chart(ctx, config);
 }
 
 const dayFromDate = date =>
     Math.floor((date - new Date(date.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
 
-function monthFromDay(day) {
-    console.log(day);
+function shortMonthFromDay(day) {
     let date = new Date(2023, 0);
     let convertedDate = new Date(date.setDate(day));
-    console.log(convertedDate.toLocaleDateString("ru-RU", {month: "long"}));
-    return  russianMonthNames[convertedDate.getMonth()];
+    return shortRussianMonths[convertedDate.getMonth()];
+}
+
+function longMonthFromDay(day) {
+    let date = new Date(2023, 0);
+    let convertedDate = new Date(date.setDate(day));
+    return longRussianMonths[convertedDate.getMonth()];
+}
+
+function toJsonFormat(date) {
+    return date.split("-").reverse().join("-");
 }
 
 function sleep(ms) {
