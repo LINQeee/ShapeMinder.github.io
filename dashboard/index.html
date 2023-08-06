@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Dashboard</title>
 
-    <link rel="stylesheet" href="http://ShapeMinder.github.io/v6.4.0/css/sharp-regular.css">
+    <!--<link rel="stylesheet" href="http://ShapeMinder.github.io/v6.4.0/css/sharp-regular.css">
     <link rel="stylesheet" href="http://ShapeMinder.github.io/v6.4.0/css/all.css">
     <link rel="stylesheet" href="http://ShapeMinder.github.io/v6.4.0/css/sharp-solid.css">
     <link rel="stylesheet" href="http://ShapeMinder.github.io/v6.4.0/css/sharp-light.css">
@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="http://ShapeMinder.github.io/styles/tableBoxStyles.css">
     <link rel="stylesheet" href="http://ShapeMinder.github.io/styles/datePickerStyles.css">
     <link rel="stylesheet" href="http://ShapeMinder.github.io/styles/popupStyles.css">
-    <link rel="stylesheet" href="http://ShapeMinder.github.io/styles/adaptiveStyles.css">
+    <link rel="stylesheet" href="http://ShapeMinder.github.io/styles/adaptiveStyles.css">-->
     
     <link rel="stylesheet" href="../v6.4.0/css/sharp-regular.css">
     <link rel="stylesheet" href="../v6.4.0/css/all.css">
@@ -56,28 +56,28 @@
                         <i class="fa-regular fa-weight-scale"></i>
                     </div>
                     <span class="cardName">Начальный вес</span>
-                    <span class="cardValue">82.2кг</span>
+                    <span class="cardValue" id="initialWeightSpan">82.2кг</span>
                 </div>
                 <div class="card panel">
                     <div class="iconBox iconOrange">
                         <i class="fa-solid fa-fire"></i>
                     </div>
                     <span class="cardName">Текущий вес</span>
-                    <span class="cardValue">65.3кг</span>
+                    <span class="cardValue" id="currentWeightSpan">65.3кг</span>
                 </div>
                 <div class="card panel">
                     <div class="iconBox iconGreen">
                         <i class="fa-regular fa-arrow-trend-down"></i>
                     </div>
                     <span class="cardName">Сброшено веса</span>
-                    <span class="cardValue">16.9кг</span>
+                    <span class="cardValue" id="lostWeightSpan">16.9кг</span>
                 </div>
                 <div class="card panel">
                     <div class="iconBox iconPurple">
                         <i class="fa-regular fa-calendar"></i>
                     </div>
                     <span class="cardName">Дата старта</span>
-                    <span class="cardValue dateText">03.01.2023</span>
+                    <span class="cardValue dateText" id="startDateSpan">03.01.2023</span>
                 </div>
             </div>
             <div class="switches">
@@ -96,25 +96,25 @@
                         <i class="fa-regular fa-bullseye-arrow"></i>
                     </div>
                     <span class="cardName">Цель</span>
-                    <span class="cardValue">63кг</span>
+                    <span class="cardValue" id="goalSpan">63кг</span>
                 </div>
                 <div class="card panel">
                     <div class="iconBox iconGreen">
                         <i class="fa-regular fa-timer"></i>
                     </div>
                     <span class="cardName">Осталось</span>
-                    <span class="cardValue">2.3кг</span>
+                    <span class="cardValue" id="leftSpan">2.3кг</span>
                 </div>
                 <div class="card panel">
                     <div class="iconBox iconRed">
                         <i class="fa-regular fa-party-horn"></i>
                     </div>
                     <span class="cardName">Дата окончания</span>
-                    <span class="cardValue">16.9кг</span>
+                    <span class="cardValue dateText" id="supposedDateSpan">16.9кг</span>
                 </div>
                 <div class="progressCard panel">
                     <div class="results">
-                        <span>0.2</span>
+                        <span id="perDaySpan">0.2</span>
                         <span>0.23</span>
                     </div>
                     <div class="progressBar blueBar">
@@ -138,7 +138,7 @@
                 </div>
                 <div class="progressCard panel">
                     <div class="results">
-                        <span>2.3</span>
+                        <span id="perWeekSpan">2.3</span>
                         <span>2.5</span>
                     </div>
                     <div class="progressBar orangeBar">
@@ -199,7 +199,7 @@
                     <i class="fa-regular fa-bars-filter"></i>
                     <span>Advanced Filters</span>
                 </div>
-                <button class="submit" onclick="openPopup()" id="addRecordButton"><i class="fa-regular fa-check"></i><i
+                <button class="submit" onclick="openCreateRecordPopup()" id="addRecordButton"><i class="fa-regular fa-check"></i><i
                         class="fa-regular fa-plus"></i>Добавить запись
                 </button>
             </div>
@@ -231,10 +231,10 @@
                         </div>
                     </td>
                     <td>
-                        <span class="dateText">01.12.2023</span>
+                        <span class="dateText recordDate">01.12.2023</span>
                     </td>
                     <td>
-                        <span>82.1kg</span>
+                        <span class="recordWeight">82.1kg</span>
                     </td>
                     <td>
                         <div class="tdContainer">

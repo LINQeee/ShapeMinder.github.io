@@ -114,4 +114,5 @@ body {
 .currentProgressBox .chart{
     width: 100%;
     height: 58%;
+    cursor: pointer;
 }
