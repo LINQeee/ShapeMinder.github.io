@@ -76,6 +76,15 @@ function setupStats(userDTO) {
     $("#supposedDateSpan").text(new Date(userDTO["plannedDate"]).toLocaleDateString("ru-RU"));
     $("#perDaySpan").text(userDTO["perDay"]);
     $("#perWeekSpan").text(userDTO["perWeek"]);
+
+    let progressBarSpan = $("#currentProgressSpan");
+    let progressBarVal = Math.round(userDTO["progress"]*10);
+
+    progressBarSpan.siblings("svg").find(".js-progress-bar").css({
+       transition: "stroke-dashoffset 1s ease-in-out",
+        strokeDashoffset: 100-progressBarVal
+    });
+    progressBarSpan.text(progressBarVal+"%");
 }
 
 function getRecords(handleData) {

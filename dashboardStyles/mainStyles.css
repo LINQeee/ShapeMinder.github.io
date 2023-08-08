@@ -3,7 +3,7 @@
 :root {
     --main-color: #F7F8FC;
     --second-color: #FFFFFF;
-    --third-color: #4632c7;
+    --third-color: #553CF8;
     --dark-color: #100C46;
 }
 
@@ -83,7 +83,7 @@ body {
     height: 71%;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: start;
     justify-content: space-between;
     position: relative;
 }

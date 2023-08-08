@@ -44,6 +44,7 @@
 }
 
 .recordsTable td:last-child, .recordsTable th:last-child {
+    width: 22%;
     text-align: center;
 }
 
@@ -53,11 +54,11 @@
 }
 
 .recordsTable td:nth-child(3) span, .recordsTable td:nth-child(4) span, .recordsTable td:nth-child(5) i {
-    margin-left: 5px;
+    margin-left: 3px;
 }
 
 .recordsTable td, .recordsTable th {
-    width: 28.7%;
+    width: 33.3%;
     text-align: left;
 }
 

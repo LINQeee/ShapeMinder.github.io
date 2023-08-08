@@ -4,38 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Dashboard</title>
+    <link rel="icon" type="image/png" href="../images/logo.png">
 
-    <link rel="stylesheet" href="http://ShapeMinder.github.io/v6.4.0/css/sharp-regular.css">
     <link rel="stylesheet" href="http://ShapeMinder.github.io/v6.4.0/css/all.css">
     <link rel="stylesheet" href="http://ShapeMinder.github.io/v6.4.0/css/sharp-solid.css">
     <link rel="stylesheet" href="http://ShapeMinder.github.io/v6.4.0/css/sharp-light.css">
-    <link rel="stylesheet" href="http://ShapeMinder.github.io/dashboard/styles.css">
-    <link rel="stylesheet" href="http://ShapeMinder.github.io/styles/headerStyles.css">
-    <link rel="stylesheet" href="http://ShapeMinder.github.io/styles/cardStyles.css">
-    <link rel="stylesheet" href="http://ShapeMinder.github.io/styles/circleProgressStyles.css">
-    <link rel="stylesheet" href="http://ShapeMinder.github.io/styles/checkBoxStyles.css">
-    <link rel="stylesheet" href="http://ShapeMinder.github.io/styles/recordsTableStyles.css">
-    <link rel="stylesheet" href="http://ShapeMinder.github.io/styles/tableBoxStyles.css">
-    <link rel="stylesheet" href="http://ShapeMinder.github.io/styles/datePickerStyles.css">
-    <link rel="stylesheet" href="http://ShapeMinder.github.io/styles/popupStyles.css">
-    <link rel="stylesheet" href="http://ShapeMinder.github.io/styles/adaptiveStyles.css">
-    <link rel="stylesheet" href="http://ShapeMinder.github.io/styles/loadingStyles.css">
-    
+    <link rel="stylesheet" href="http://ShapeMinder.github.io/dashboardStyles/mainStyles.css">
+    <link rel="stylesheet" href="http://ShapeMinder.github.io/dashboardStyles/headerStyles.css">
+    <link rel="stylesheet" href="http://ShapeMinder.github.io/dashboardStyles/cardStyles.css">
+    <link rel="stylesheet" href="http://ShapeMinder.github.io/dashboardStyles/circleProgressStyles.css">
+    <link rel="stylesheet" href="http://ShapeMinder.github.io/dashboardStyles/checkBoxStyles.css">
+    <link rel="stylesheet" href="http://ShapeMinder.github.io/dashboardStyles/recordsTableStyles.css">
+    <link rel="stylesheet" href="http://ShapeMinder.github.io/dashboardStyles/tableBoxStyles.css">
+    <link rel="stylesheet" href="http://ShapeMinder.github.io/dashboardStyles/datePickerStyles.css">
+    <link rel="stylesheet" href="http://ShapeMinder.github.io/dashboardStyles/popupStyles.css">
+    <link rel="stylesheet" href="http://ShapeMinder.github.io/dashboardStyles/adaptiveStyles.css">
+    <link rel="stylesheet" href="http://ShapeMinder.github.io/dashboardStyles/loadingStyles.css">
+
     <link rel="stylesheet" href="../v6.4.0/css/sharp-regular.css">
     <link rel="stylesheet" href="../v6.4.0/css/all.css">
     <link rel="stylesheet" href="../v6.4.0/css/sharp-solid.css">
     <link rel="stylesheet" href="../v6.4.0/css/sharp-light.css">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="../styles/headerStyles.css">
-    <link rel="stylesheet" href="../styles/cardStyles.css">
-    <link rel="stylesheet" href="../styles/circleProgressStyles.css">
-    <link rel="stylesheet" href="../styles/checkBoxStyles.css">
-    <link rel="stylesheet" href="../styles/recordsTableStyles.css">
-    <link rel="stylesheet" href="../styles/tableBoxStyles.css">
-    <link rel="stylesheet" href="../styles/datePickerStyles.css">
-    <link rel="stylesheet" href="../styles/popupStyles.css">
-    <link rel="stylesheet" href="../styles/adaptiveStyles.css">
-    <link rel="stylesheet" href="../styles/loadingStyles.css">
+    <link rel="stylesheet" href="../dashboardStyles/mainStyles.css">
+    <link rel="stylesheet" href="../dashboardStyles/headerStyles.css">
+    <link rel="stylesheet" href="../dashboardStyles/cardStyles.css">
+    <link rel="stylesheet" href="../dashboardStyles/circleProgressStyles.css">
+    <link rel="stylesheet" href="../dashboardStyles/checkBoxStyles.css">
+    <link rel="stylesheet" href="../dashboardStyles/recordsTableStyles.css">
+    <link rel="stylesheet" href="../dashboardStyles/tableBoxStyles.css">
+    <link rel="stylesheet" href="../dashboardStyles/datePickerStyles.css">
+    <link rel="stylesheet" href="../dashboardStyles/popupStyles.css">
+    <link rel="stylesheet" href="../dashboardStyles/adaptiveStyles.css">
+    <link rel="stylesheet" href="../dashboardStyles/loadingStyles.css">
 </head>
 <body>
 <div class="loading">
@@ -56,7 +56,31 @@
             <div class="chart panel">
                 <canvas id="chart"></canvas>
             </div>
-            <div class="cardBox" id="currentStatsCards" data-row-index="0">
+            <div class="cardBox" id="currentStatsCards">
+                <div class="switches">
+                    <div class="buttons panel">
+                        <button onclick="scrollUp('currentStatsCards')"><i class="fa-solid fa-chevron-up"></i></button>
+                        <span>1</span>
+                        <button onclick="scrollDown('currentStatsCards')"><i class="fa-solid fa-chevron-down"></i></button>
+                    </div>
+                </div>
+                <div class="primaryProgressCard panel">
+                    <span class="cardName">Прогресс</span>
+                    <div class="progressBar purpleBar">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             viewBox="-4 -4 40 40">
+
+                            <circle cx="16" cy="16" r="15.9155"
+                                    class="progress-bar__background"/>
+
+                            <circle cx="16" cy="16" r="15.9155"
+                                    class="progress-bar__progress
+                 js-progress-bar"/>
+                        </svg>
+                        <span id="currentProgressSpan">70%</span>
+                        <div class="progressShadow"></div>
+                    </div>
+                </div>
                 <div class="card panel">
                     <div class="iconBox iconBlue">
                         <i class="fa-regular fa-weight-scale"></i>
@@ -86,17 +110,17 @@
                     <span class="cardValue dateText" id="startDateSpan">03.01.2023</span>
                 </div>
             </div>
-            <div class="switches">
-                <div class="buttons panel">
-                    <button onclick="scrollUp('currentStatsCards')"><i class="fa-solid fa-chevron-up" id="switchUp"></i></button>
-                    <span>1</span>
-                    <button onclick="scrollDown('currentStatsCards')"><i class="fa-solid fa-chevron-down" id="switchDown"></i></button>
-                </div>
-            </div>
         </div>
         <div class="goalStatsBox">
             <span class="sectionHeader">Статистика цели и прогресс</span>
             <div class="cardBox" id="goalStatsCards" data-row-index="0">
+                <div class="switches">
+                    <div class="buttons panel">
+                        <button onclick="scrollUp('goalStatsCards')"><i class="fa-solid fa-chevron-up"></i></button>
+                        <span>1</span>
+                        <button onclick="scrollDown('goalStatsCards')"><i class="fa-solid fa-chevron-down"></i></button>
+                    </div>
+                </div>
                 <div class="card panel">
                     <div class="iconBox iconOrange">
                         <i class="fa-regular fa-bullseye-arrow"></i>
@@ -167,13 +191,7 @@
                     </div>
                 </div>
             </div>
-            <div class="switches">
-                <div class="buttons panel">
-                    <button onclick="scrollUp('goalStatsCards')"><i class="fa-solid fa-chevron-up" id="switchUp"></i></button>
-                    <span>1</span>
-                    <button onclick="scrollDown('goalStatsCards')"><i class="fa-solid fa-chevron-down" id="switchDown"></i></button>
-                </div>
-            </div>
+
         </div>
     </div>
     <div class="recordsBox">

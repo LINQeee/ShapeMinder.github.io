@@ -25,8 +25,9 @@
         padding: 1% !important;
     }
 
-    .cardBox .card, .cardBox .progressCard{
+    .cardBox .card, .cardBox .progressCard, .cardBox .primaryProgressCard{
         height: 14dvh;
+        max-height: 140px;
     }
 }
 

@@ -15,6 +15,21 @@
     display: none;
 }
 
+.primaryProgressCard{
+    box-sizing: border-box;
+    padding: 0.5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    position: relative;
+    aspect-ratio: 1 / 1;
+    min-height: 133px;
+    height: 16dvh;
+    max-height: 160px;
+    transition: all 0.3s;
+}
+
 .switches{
     display: flex;
     align-items: start;
@@ -25,21 +40,11 @@
     height: 100%;
 }
 
-.currentProgressBox .switches{
-    align-items: end;
-}
-
-.currentProgressBox .switches .buttons{
-    margin-top: 0;
-    margin-bottom: 280%;
-}
-
 .switches .buttons {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 0.3%;
-    margin-top: 220%;
 }
 
 .switches span {
@@ -130,12 +135,15 @@
 
 .goalStatsBox:has(.switches > .buttons > button:not(:disabled)) .cardBox .card,
 .goalStatsBox:has(.switches > .buttons > button:not(:disabled)) .cardBox .progressCard,
+.goalStatsBox:has(.switches > .buttons > button:not(:disabled)) .cardBox .primaryProgressCard,
 .currentProgressBox:has(.switches > .buttons > button:not(:disabled)) .cardBox .card,
-.currentProgressBox:has(.switches > .buttons > button:not(:disabled)) .cardBox .progressCard {
+.currentProgressBox:has(.switches > .buttons > button:not(:disabled)) .cardBox .progressCard,
+.currentProgressBox:has(.switches > .buttons > button:not(:disabled)) .cardBox .primaryProgressCard{
     margin-left: 34px;
 }
 
-.goalStatsBox:has(.switches > .buttons > button:not(:disabled)) .cardBox{
+.goalStatsBox:has(.switches > .buttons > button:not(:disabled)) .cardBox,
+.currentProgressBox:has(.switches > .buttons > button:not(:disabled)) .cardBox{
     gap: 45px 0;
 }
 

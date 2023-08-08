@@ -2,6 +2,19 @@
     --progress-bar-stroke-width: 3.2;
 }
 
+.primaryProgressCard svg {
+    height: 80%;
+    width: 80%;
+}
+
+.primaryProgressCard .progressBar{
+    margin-top: 5%;
+}
+
+.primaryProgressCard .progressBar span{
+    font-size: 15px;
+}
+
 .progressBar{
     position: absolute;
     margin-top: -7.5%;
@@ -19,6 +32,19 @@
     background: transparent;
     height: 0;
     border-radius: 100%;
+}
+
+.purpleBar .progressShadow{
+    margin-top: 55%;
+    box-shadow: 0 0 25px 10px rgba(70, 50, 199, 0.1);
+}
+
+.purpleBar span {
+    color: var(--third-color);
+}
+
+.purpleBar .progress-bar__progress{
+    stroke: var(--third-color);
 }
 
 .blueBar .progressShadow{
@@ -65,8 +91,7 @@ svg {
 .progress-bar__progress {
     fill: none;
     stroke-dasharray: 100 100;
-    stroke-dashoffset: 10;
+    stroke-dashoffset: 100;
     stroke-linecap: round;
     stroke-width: var(--progress-bar-stroke-width);
-    transition: stroke-dashoffset 1s ease-in-out;
 }
