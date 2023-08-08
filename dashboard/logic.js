@@ -18,6 +18,7 @@ class inputFieldError {
 }
 
 $(function () {
+    if (window.location.href==="http://weight-project.me") window.location.href==="http://weight-project.me/dashboard";
     uiSetup();
     setupStatsAndRecords();
     loadingFinish();
