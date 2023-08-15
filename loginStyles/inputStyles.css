@@ -1,0 +1,83 @@
+.formInput {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 13%;
+    width: 100%;
+}
+
+.formInput label {
+    color: var(--dark-color);
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.formInput input {
+    height: 63%;
+    border-radius: 8px;
+    border: 2px solid #A0ADB9;
+    outline: none;
+    background: transparent;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    color: var(--dark-color);
+    box-sizing: border-box;
+    padding: 0 1% 0 1%;
+    transition: all 0.2s;
+}
+
+.formInput input:hover {
+    border-color: #4B545C;
+}
+
+.formInput input:focus, .formInput input:valid {
+    border-color: #553CF8;
+}
+
+.extraInput {
+    display: flex;
+    width: 99%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.keepMeLogged {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 38%;
+}
+
+.keepMeLogged label {
+    font-size: 18px;
+    color: var(--dark-color);
+    cursor: pointer;
+}
+
+.extraInput a {
+    text-decoration: none;
+    color: var(--third-color);
+    font-size: 18px;
+}
+
+button {
+    width: 100%;
+    height: 9%;
+    border: none;
+    outline: none;
+    background: var(--third-color);
+    color: var(--main-color);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    border-radius: 6px;
+    filter: drop-shadow(0px 18px 30px rgba(85, 60, 248, 0.25));
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+button:hover {
+    background: var(--main-color);
+    border: 1px solid var(--third-color);
+    color: var(--third-color);
+
+}

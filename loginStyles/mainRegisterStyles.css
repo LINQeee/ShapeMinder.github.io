@@ -1,0 +1,31 @@
+#biologyForm {
+    display: none;
+    opacity: 0;
+}
+
+.formBody {
+    height: 59.5% !important;
+    transition: all 0.3s;
+}
+
+.doubleInput {
+    width: 100%;
+    height: 13%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.doubleInput .formInput {
+    width: 45%;
+    height: 100%;
+}
+
+.doubleInput .formInput input {
+    padding: 2%;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

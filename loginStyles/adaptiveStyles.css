@@ -1,0 +1,64 @@
+@media screen and (max-width: 1200px) {
+    #backgroundImage {
+        display: none;
+    }
+
+    .formBox {
+        width: 100%;
+    }
+}
+
+@media screen and (max-height: 750px) {
+    .form {
+        padding-top: 1% !important;
+    }
+
+    .header span {
+        font-size: 35px;
+    }
+
+    .header img {
+        width: 20%;
+    }
+}
+
+@media  screen and (max-width: 550px) {
+    .form {
+        width: 100%;
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+
+    .keepMeLogged label{
+        white-space: nowrap;
+        margin-left: 4%;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .header span {
+        font-size: 30px !important;
+    }
+
+    .header img {
+        width: 100px !important;
+    }
+
+    .form {
+        padding-top: 1% !important;
+    }
+
+    .extraInput {
+        flex-direction: column !important;
+        align-items: start !important;
+        justify-content: space-between !important;
+    }
+
+    .extraInput:has(a) {
+        height: 12% !important;
+    }
+
+    .footer {
+        height: 10% !important;
+    }
+}

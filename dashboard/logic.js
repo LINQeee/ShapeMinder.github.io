@@ -21,6 +21,26 @@ $(function () {
     uiSetup();
     setupStatsAndRecords();
     loadingFinish();
+
+    $.ajax({
+        type: "POST",
+        url: "https://localhost:9092/user",
+        data: JSON.stringify({
+            username: "Kolya",
+            password: "pass",
+            gender : "M",
+            height: "180",
+            initialWeight: "80",
+            goalWeight: "60"
+        }),
+        contentType: "application/json",
+        success: function (response) {
+            console.log(response);
+        },
+        error: function (e) {
+            console.log(e);
+        }
+    });
 });
 
 function loadingFinish() {

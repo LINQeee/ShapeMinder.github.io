@@ -1,0 +1,72 @@
+.genderInput {
+    width: 100%;
+    height: 24%;
+    display: flex;
+    flex-direction: column;
+}
+
+.genderInput label {
+    font-size: 18px;
+    color: var(--dark-color);
+    font-weight: 400;
+}
+
+.genderChoices {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    gap: 25px;
+}
+
+.choice {
+    height: 100%;
+    width: 30%;
+    aspect-ratio: 1/ 0.76;
+    border: 2px solid #A0ADB9;
+    box-sizing: border-box;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: all 0.3s;
+}
+
+.choice input {
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.choiceContent{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 5%;
+    pointer-events: none;
+}
+
+.choiceContent img {
+    width: 60%;
+}
+
+.choiceContent span {
+    font-size: 15px;
+    color: var(--dark-color);
+    font-weight: 400;
+}
+
+.choice:hover {
+    border-color: #4B545C;
+}
+
+.choice:has(input:checked) {
+    border-color: var(--third-color);
+    background: rgba(85, 60, 248, 0.05);
+}
