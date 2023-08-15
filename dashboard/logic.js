@@ -90,7 +90,7 @@ function setupStats(userDTO) {
 function getRecords(handleData) {
     $.ajax({
         type: 'GET',
-        url: 'https://89.108.76.24:9092/summary?id=1',
+        url: 'https://shape-minder.tech/summary?id=1',
         dataType: 'json',
         success: function (data) {
             handleData(data);
@@ -103,7 +103,7 @@ function editRecord() {
     let dateVal = toJsonFormat($("#dateInput").val());
     $.ajax({
         type: "POST",
-        url: "https://89.108.76.24:9092/record",
+        url: "https://shape-minder.tech/record",
         data: JSON.stringify({
             currentWeight: weightVal,
             date: dateVal,
@@ -127,7 +127,7 @@ function deleteRecord(button) {
 
     $.ajax({
         type: "DELETE",
-        url: "https://89.108.76.24:9092/record?id=" + recordId,
+        url: "https://shape-minder.tech/record?id=" + recordId,
         success: function (response) {
             setupStatsAndRecords();
             console.log(response);
@@ -143,7 +143,7 @@ function createRecord() {
     let dateVal = toJsonFormat($("#dateInput").val());
     $.ajax({
         type: "POST",
-        url: "https://89.108.76.24:9092/record",
+        url: "https://shape-minder.tech/record",
         data: JSON.stringify({
             currentWeight: weightVal,
             date: dateVal,
