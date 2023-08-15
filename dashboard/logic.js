@@ -21,26 +21,6 @@ $(function () {
     uiSetup();
     setupStatsAndRecords();
     loadingFinish();
-
-    $.ajax({
-        type: "POST",
-        url: "https://localhost:9092/user",
-        data: JSON.stringify({
-            username: "Kolya",
-            password: "pass",
-            gender : "M",
-            height: "180",
-            initialWeight: "80",
-            goalWeight: "60"
-        }),
-        contentType: "application/json",
-        success: function (response) {
-            console.log(response);
-        },
-        error: function (e) {
-            console.log(e);
-        }
-    });
 });
 
 function loadingFinish() {
@@ -110,7 +90,7 @@ function setupStats(userDTO) {
 function getRecords(handleData) {
     $.ajax({
         type: 'GET',
-        url: 'http://89.108.76.24:9092/summary?id=1',
+        url: 'https://89.108.76.24:9092/summary?id=1',
         dataType: 'json',
         success: function (data) {
             handleData(data);
@@ -123,7 +103,7 @@ function editRecord() {
     let dateVal = toJsonFormat($("#dateInput").val());
     $.ajax({
         type: "POST",
-        url: "http://89.108.76.24:9092/record",
+        url: "https://89.108.76.24:9092/record",
         data: JSON.stringify({
             currentWeight: weightVal,
             date: dateVal,
@@ -147,7 +127,7 @@ function deleteRecord(button) {
 
     $.ajax({
         type: "DELETE",
-        url: "http://89.108.76.24:9092/record?id=" + recordId,
+        url: "https://89.108.76.24:9092/record?id=" + recordId,
         success: function (response) {
             setupStatsAndRecords();
             console.log(response);
@@ -163,7 +143,7 @@ function createRecord() {
     let dateVal = toJsonFormat($("#dateInput").val());
     $.ajax({
         type: "POST",
-        url: "http://89.108.76.24:9092/record",
+        url: "https://89.108.76.24:9092/record",
         data: JSON.stringify({
             currentWeight: weightVal,
             date: dateVal,
