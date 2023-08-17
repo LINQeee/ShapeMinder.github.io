@@ -78,7 +78,7 @@ function setupStats(userDTO) {
     $("#perWeekSpan").text(userDTO["perWeek"]);
 
     let progressBarSpan = $("#currentProgressSpan");
-    let progressBarVal = Math.round(userDTO["progress"]*10);
+    let progressBarVal = Math.round(userDTO["progress"]*100);
 
     progressBarSpan.siblings("svg").find(".js-progress-bar").css({
        transition: "stroke-dashoffset 1s ease-in-out",
