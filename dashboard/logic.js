@@ -6,10 +6,6 @@ const shortRussianMonths = ['Янв', 'Фев', 'Мар', 'Апр', 'Май', '�
 const longRussianMonths = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
 const FieldType = {DATE: "#dateInput", WEIGHT: "#weightInput"}
 
-let mainChart;
-let currentEditingRecord;
-let selectedDate;
-
 class inputFieldError {
     constructor(message, fieldType) {
         this.message = message;
@@ -87,78 +83,6 @@ function setupStats(userDTO) {
     progressBarSpan.text(progressBarVal+"%");
 }
 
-function getRecords(handleData) {
-    $.ajax({
-        type: 'GET',
-        url: 'https://shape-minder.tech/summary?id=1',
-        dataType: 'json',
-        success: function (data) {
-            handleData(data);
-        }
-    });
-}
-
-function editRecord() {
-    let weightVal = $("#weightInput").val();
-    let dateVal = toJsonFormat($("#dateInput").val());
-    $.ajax({
-        type: "POST",
-        url: "https://shape-minder.tech/record",
-        data: JSON.stringify({
-            currentWeight: weightVal,
-            date: dateVal,
-            userId: 1,
-            id: currentEditingRecord["id"]
-        }),
-        contentType: "application/json",
-        success: function (response) {
-            console.log(response);
-            currentEditingRecord = null;
-            setupStatsAndRecords();
-        },
-        error: function (e) {
-            console.log(e);
-        }
-    });
-}
-
-function deleteRecord(button) {
-    let recordId = $(button).closest("tr").attr("data-record-id");
-
-    $.ajax({
-        type: "DELETE",
-        url: "https://shape-minder.tech/record?id=" + recordId,
-        success: function (response) {
-            setupStatsAndRecords();
-            console.log(response);
-        },
-        error: function (e) {
-            console.log(e);
-        }
-    });
-}
-
-function createRecord() {
-    let weightVal = $("#weightInput").val();
-    let dateVal = toJsonFormat($("#dateInput").val());
-    $.ajax({
-        type: "POST",
-        url: "https://shape-minder.tech/record",
-        data: JSON.stringify({
-            currentWeight: weightVal,
-            date: dateVal,
-            userId: 1
-        }),
-        contentType: "application/json",
-        success: function (response) {
-            setupStatsAndRecords();
-            console.log(response);
-        },
-        error: function (e) {
-            console.log(e);
-        }
-    });
-}
 
 function validateInputs() {
     let dateInputVal = $("#dateInput").val();
@@ -176,250 +100,36 @@ function validateInputs() {
     return fieldsErrors;
 }
 
-function openCreateRecordPopup() {
-    $("#dateInput").datepicker("setDate", new Date());
-    $("#weightInput").val("");
-    openPopup();
-}
-
-function openEditRecordPopup(button) {
-    let tableRecord = $(button).closest("tr");
-    let currentWeight = tableRecord.find(".recordWeight").text();
-    currentWeight = currentWeight.slice(0, currentWeight.length - 2);
-    console.log(currentWeight);
-    currentEditingRecord = {
-        id: tableRecord.attr("data-record-id"),
-        date: tableRecord.find(".recordDate").text().replaceAll(".", "-"),
-        currentWeight: currentWeight,
-        userId: 1
-    };
-
-    $("#dateInput").val(currentEditingRecord["date"]);
-    $("#weightInput").val(currentEditingRecord["currentWeight"]);
-
-    openPopup();
-}
-
-function uiSetup() {
-    let submitButtons = $(".submit");
-    submitButtons.on("click", function () {
-        $(this).attr("disabled", "disabled")
-        $(this).css("animation", "0.8s ease-in-out submitButton")
-            .children(".fa-check")
-            .css("animation", "0.8s ease-in-out submitCheck");
-    });
-
-    submitButtons.on("animationend", function () {
-        $(this).css("animation", "")
-            .children(".fa-check")
-            .css("animation", "");
-    });
-
-    $("#dateInput").datepicker({
-        maxDate: new Date(),
-        dateFormat: "dd-mm-yy",
-        duration: "fast",
-        closeText: 'Закрыть',
-        prevText: 'Предыдущий',
-        nextText: 'Следующий',
-        currentText: 'Сегодня',
-        monthNames: longRussianMonths,
-        monthNamesShort: shortRussianMonths,
-        dayNames: ['воскресенье', 'понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота'],
-        dayNamesShort: ['вск', 'пнд', 'втр', 'срд', 'чтв', 'птн', 'сбт'],
-        dayNamesMin: ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'],
-        weekHeader: 'Не',
-        firstDay: 1,
-        isRTL: false,
-        showMonthAfterYear: false,
-        yearSuffix: '',
-        onSelect: function () {
-            $(this).parent().removeClass("error");
-            selectedDate = $(this).val();
-        }
-    });
-
-    $('#dateInput').datepicker("setDate", new Date());
-}
-
-function openPopup() {
-    $("#dateInput").parent().removeClass("error");
-    $("#weightInput").parent().removeClass("error");
-    $("#saveButton").removeAttr("disabled");
-    popup.css("animation", "0.3s ease-in-out forwards showPopup");
-}
-
-function closePopup() {
-    currentEditingRecord = null;
-    popup.css("animation", "0.3s ease-in-out forwards hidePopup");
-    addRecordButton.removeAttr("disabled");
-}
-
 async function save() {
     let saveButton = $("#saveButton");
     let fieldErrors = validateInputs();
     if (fieldErrors.length > 0) {
         for (let error of fieldErrors) {
-            let input = $(error["fieldType"]);
-            input.siblings("span").text(error["message"]);
-            input.parent().addClass("error");
+            showInputError(error);
         }
         await sleep(100);
         saveButton.removeAttr("disabled");
         return;
     }
-    if (currentEditingRecord != null) editRecord();
-    else createRecord();
-    await sleep(900);
-    closePopup();
+    if (currentEditingRecord != null) editRecord(handleRecordResponse);
+    else createRecord(handleRecordResponse);
+
     await sleep(100);
     saveButton.removeAttr("disabled");
 }
 
-function initChart(weightList, datesList) {
-    let data = [];
-    for (let i = 0; i < datesList.length; i++) {
-        data.push({x: dayFromDate(datesList[i]), y: weightList[i]});
+function showInputError(error) {
+    let input = $(error["fieldType"]);
+    console.log(error);
+    input.siblings("span").text(error["message"]);
+    input.parent().addClass("error");
+}
+
+async function handleRecordResponse(status, inputFieldError) {
+    if(status === 200){
+        await sleep(900);
+        closePopup();
+        await sleep(100);
     }
-    Chart.defaults.font.family = "Montserrat";
-    const ctx = $("#chart");
-
-    const totalDuration = data.length * 50;
-    const delayBetweenPoints = totalDuration / data.length;
-    const previousY = (ctx) => ctx.index === 0 ? ctx.chart.scales.y.getPixelForValue(100) : ctx.chart.getDatasetMeta(ctx.datasetIndex).data[ctx.index - 1].getProps(['y'], true).y;
-    const animation = {
-        x: {
-            type: 'number',
-            easing: 'linear',
-            duration: delayBetweenPoints,
-            from: NaN,
-            delay(ctx) {
-                if (ctx.type !== 'data' || ctx.xStarted) {
-                    return 0;
-                }
-                ctx.xStarted = true;
-                return ctx.index * delayBetweenPoints;
-            }
-        },
-        y: {
-            type: 'number',
-            easing: 'linear',
-            duration: delayBetweenPoints,
-            from: previousY,
-            delay(ctx) {
-                if (ctx.type !== 'data' || ctx.yStarted) {
-                    return 0;
-                }
-                ctx.yStarted = true;
-                return ctx.index * delayBetweenPoints;
-            }
-        }
-    };
-
-    const config = {
-        type: 'line',
-        data: {
-            datasets: [{
-                label: 'Вес',
-                data: data,
-                fill: false,
-                borderColor: '#4C2DFE',
-                tension: 0.3,
-                radius: 3
-            }]
-        },
-        options: {
-            animation,
-            responsive: true,
-            maintainAspectRatio: false,
-            elements: {
-                point: {
-                    hitRadius: 10
-                }
-            },
-            plugins: {
-                legend: {
-                    display: false,
-                },
-                tooltip: {
-                    callbacks: {
-                        title: function (value) {
-                            return longMonthFromDay(value[0]["label"]);
-                        },
-                        label: function (value) {
-                            return value["dataset"]["label"] + ": " + value["formattedValue"] + "кг";
-                        }
-                    },
-                    displayColors: false,
-                    backgroundColor: "#100C46"
-                }
-            },
-            layout: {
-                padding: {
-                    left: 15,
-                    top: 22,
-                    right: 21.5,
-                    bottom: 16
-                }
-            },
-            scales: {
-                y: {
-                    grid: {
-                        drawBorder: false,
-                        color: "rgba(204, 204, 204, 0.4)"
-                    },
-                    ticks: {
-                        color: "#5E5E5E",
-                        font: {
-                            size: 15,
-                        }
-                    }
-                },
-                x: {
-                    type: "linear",
-                    grid: {
-                        drawBorder: false,
-                        display: false
-                    },
-                    ticks: {
-                        color: "#5E5E5E",
-                        font: {
-                            size: 15,
-                        },
-
-                        callback: function (value) {
-                            return shortMonthFromDay(value);
-                        }
-                    }
-                }
-            }
-        },
-    };
-    isChartLoaded = true;
-
-    if (mainChart != null) mainChart.destroy();
-    mainChart = new Chart(ctx, config);
-}
-
-const dayFromDate = date =>
-    Math.floor((date - new Date(date.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
-
-function shortMonthFromDay(day) {
-    let date = new Date(2023, 0);
-    let convertedDate = new Date(date.setDate(day));
-    return shortRussianMonths[convertedDate.getMonth()];
-}
-
-function longMonthFromDay(day) {
-    let date = new Date(2023, 0);
-    let convertedDate = new Date(date.setDate(day));
-    return longRussianMonths[convertedDate.getMonth()];
-}
-
-function toJsonFormat(date) {
-    return date.split("-").reverse().join("-");
-}
-
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+    else if (status === 500) showInputError(inputFieldError);
 }

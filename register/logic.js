@@ -16,7 +16,3 @@ async function nexForm() {
     biologyForm.css("opacity", "1");
     headerSpan.css("opacity", "1");
 }
-
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
