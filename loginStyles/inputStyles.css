@@ -63,7 +63,7 @@
 button {
     width: 100%;
     height: 9%;
-    border: none;
+    border: 1px solid transparent;
     outline: none;
     background: var(--third-color);
     color: var(--main-color);
@@ -80,4 +80,24 @@ button:hover {
     border: 1px solid var(--third-color);
     color: var(--third-color);
 
+}
+
+.error > span {
+    color: #FF2C2C;
+    display: flex !important;
+    position: absolute;
+    bottom: -20px;
+    font-size: 15px;
+}
+
+.error.genderInput .choice {
+    border-color: rgba(255, 44, 44, 0.5);
+}
+
+.error {
+    position: relative;
+}
+
+.error input {
+    border-color: #FF2C2C !important;
 }

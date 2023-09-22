@@ -4,14 +4,6 @@ const popup = $("#popup");
 const addRecordButton = $("#addRecordButton");
 const shortRussianMonths = ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'];
 const longRussianMonths = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
-const FieldType = {DATE: "#dateInput", WEIGHT: "#weightInput"}
-
-class inputFieldError {
-    constructor(message, fieldType) {
-        this.message = message;
-        this.fieldType = fieldType;
-    }
-}
 
 $(function () {
     uiSetup();
@@ -116,13 +108,6 @@ async function save() {
 
     await sleep(100);
     saveButton.removeAttr("disabled");
-}
-
-function showInputError(error) {
-    let input = $(error["fieldType"]);
-    console.log(error);
-    input.siblings("span").text(error["message"]);
-    input.parent().addClass("error");
 }
 
 async function handleRecordResponse(status, inputFieldError) {

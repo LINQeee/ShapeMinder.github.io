@@ -63,7 +63,7 @@
 }
 
 .choice:hover {
-    border-color: #4B545C;
+    border-color: #4B545C !important;
 }
 
 .choice:has(input:checked) {

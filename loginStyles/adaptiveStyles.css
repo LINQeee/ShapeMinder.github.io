@@ -6,6 +6,23 @@
     .formBox {
         width: 100%;
     }
+
+    .popup {
+        width: 100% !important;
+        height: 100% !important;
+        gap: 10% !important;
+    }
+
+    .popup img {
+        width: 60dvw !important;
+        min-width: 600px;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .popup img {
+        min-width: calc(100% - 10px);
+    }
 }
 
 @media screen and (max-height: 750px) {
@@ -60,5 +77,9 @@
 
     .footer {
         height: 10% !important;
+    }
+
+    .error > span {
+        font-size: 13px !important;
     }
 }

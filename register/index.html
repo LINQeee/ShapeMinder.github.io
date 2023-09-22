@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <base href="{{site.baseurl}}" />
+    <base href="{{site.baseurl}}"/>
     <meta charset="UTF-8">
     <title>Login Page</title>
     <link rel="icon" type="image/png" href="../images/logo.png">
@@ -19,8 +19,26 @@
     <link rel="stylesheet" href="../loginStyles/footerStyles.css">
     <link rel="stylesheet" href="../loginStyles/mainRegisterStyles.css">
     <link rel="stylesheet" href="../loginStyles/genderInputStyles.css">
+    <link rel="stylesheet" href="../loginStyles/popupStyles.css">
 </head>
 <body>
+<div class="popupBox">
+    <div class="popup">
+        <img src="../images/envelope.png" alt="art">
+        <span class="header">На вашу почту был отправлен код подтверждения</span>
+        <div class="inputs">
+            <div class="codeBox">
+                <input type="tel" maxlength="1" pattern="[0-9]" required oninput="handleCodeInput(this)">
+                <input type="tel" maxlength="1" pattern="[0-9]" required oninput="handleCodeInput(this)">
+                <input type="tel" maxlength="1" pattern="[0-9]" required oninput="handleCodeInput(this)">
+                <input type="tel" maxlength="1" pattern="[0-9]" required oninput="handleCodeInput(this)">
+                <input type="tel" maxlength="1" pattern="[0-9]" required oninput="handleCodeInput(this)">
+                <input type="tel" maxlength="1" pattern="[0-9]" required oninput="handleCodeInput(this)">
+            </div>
+            <span class="error">Error</span>
+        </div>
+    </div>
+</div>
 <div class="formBox">
     <div class="form">
         <div class="header">
@@ -28,66 +46,71 @@
             <span id="headerSpan">Добро пожаловать</span>
         </div>
         <div class="formBody" id="accountForm">
-        <div class="formInput">
-            <label for="emailInput">Адрес Электронной Почты</label>
-            <input type="text" required id="emailInput">
-            <span style="display: none">error</span>
-        </div>
-        <div class="formInput">
-            <label for="passwordInput">Пароль</label>
-            <input type="text" required id="passwordInput">
-            <span style="display: none">error</span>
-        </div>
             <div class="formInput">
-                <label for="passwordConfirmInput">Подтвердите Пароль</label>
-                <input type="text" required id="passwordConfirmInput">
+                <label for="emailInput">Адрес Электронной Почты</label>
+                <input type="email" required id="emailInput" oninput="$(this).parent().removeClass('error')">
                 <span style="display: none">error</span>
             </div>
-        <div class="extraInput">
-            <div class="keepMeLogged">
-                <div class="checkBox">
-                    <input type="checkbox" id="isRememberMe">
-                    <i class="fa-regular fa-square-check"></i>
-                    <i class="fa-regular fa-square"></i>
-                </div>
-                <label for="isRememberMe">Запомнить Меня</label>
+            <div class="formInput">
+                <label for="passwordInput">Пароль</label>
+                <input type="password" required id="passwordInput" autocomplete="off"
+                       oninput="$(this).parent().removeClass('error')">
+                <span style="display: none">error</span>
             </div>
-        </div>
-        <button onclick="nexForm()">Продолжить</button>
-        <div class="footer">
-            <span>Уже есть аккаунт? <a href="#">Войти</a></span>
-        </div>
+            <div class="formInput">
+                <label for="passwordConfirmInput">Подтвердите Пароль</label>
+                <input type="password" required id="passwordConfirmInput" autocomplete="off"
+                       oninput="$(this).parent().removeClass('error')">
+                <span style="display: none">error</span>
+            </div>
+            <div class="extraInput">
+                <div class="keepMeLogged">
+                    <div class="checkBox">
+                        <input type="checkbox" id="isRememberMe">
+                        <i class="fa-regular fa-square-check"></i>
+                        <i class="fa-regular fa-square"></i>
+                    </div>
+                    <label for="isRememberMe">Запомнить Меня</label>
+                </div>
+            </div>
+            <button onclick="nextForm()">Продолжить</button>
+            <div class="footer">
+                <span>Уже есть аккаунт? <a href="#">Войти</a></span>
+            </div>
         </div>
         <div class="formBody" id="biologyForm">
             <div class="formInput">
                 <label for="usernameInput">Имя пользователя</label>
-                <input type="text" required id="usernameInput">
+                <input type="text" required id="usernameInput" oninput="$(this).parent().removeClass('error')">
                 <span style="display: none">error</span>
             </div>
             <div class="doubleInput">
-            <div class="formInput">
-                <label for="ageInput">Возраст</label>
-                <input type="number" required id="ageInput" name="ageInput">
-                <span style="display: none">error</span>
-            </div>
-            <div class="formInput">
-                <label for="heightInput">Рост</label>
-                <input type="number" required id="heightInput">
-                <span style="display: none">error</span>
-            </div>
+                <div class="formInput">
+                    <label for="ageInput">Возраст</label>
+                    <input type="number" required id="ageInput" name="ageInput"
+                           oninput="$(this).parent().removeClass('error')">
+                    <span style="display: none">error</span>
+                </div>
+                <div class="formInput">
+                    <label for="heightInput">Рост</label>
+                    <input type="number" required id="heightInput" oninput="$(this).parent().removeClass('error')">
+                    <span style="display: none">error</span>
+                </div>
             </div>
             <div class="genderInput">
                 <label>Пол</label>
-                <div class="genderChoices">
+                <div id="genderChoices" class="genderChoices">
                     <div class="choice">
-                    <input type="radio" name="gender" id="a">
+                        <input type="radio" name="gender" id="maleInput"
+                               oninput="$(this).parent().parent().parent().removeClass('error')">
                         <div class="choiceContent">
                             <img src="../images/maleGender.png" alt="male gender icon">
                             <span>Муж.</span>
                         </div>
                     </div>
                     <div class="choice">
-                    <input type="radio" name="gender" id="d">
+                        <input type="radio" name="gender" id="femaleInput"
+                               onchange="$(this).parent().parent().parent().removeClass('error')">
                         <div class="choiceContent">
                             <img src="../images/femaleGender.png" alt="female gender icon">
                             <span>Жен.</span>
@@ -95,7 +118,7 @@
                     </div>
                 </div>
             </div>
-            <button>Зарегистрироваться</button>
+            <button onclick="submitForm()">Зарегистрироваться</button>
             <div class="footer">
                 <span>Уже есть аккаунт? <a href="#">Войти</a></span>
             </div>
@@ -108,5 +131,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script src="logic.js"></script>
 <script src="../GlobalJS/utils.js"></script>
+<script src="../GlobalJS/inputValidating.js"></script>
+<script src="../GlobalJS/userApiLogic.js"></script>
+<script src="../GlobalJS/emailCodeLogic.js"></script>
 </body>
 </html>
