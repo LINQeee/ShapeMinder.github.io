@@ -43,13 +43,15 @@ function wrongCode(responseText) {
 function openEmailPopup() {
     $(".popupBox").css({
         opacity: "1",
-        bottom: "0"
+        bottom: "0",
+        scale: "1"
     })
 }
 
 function closeEmailPopup() {
     $(".popupBox").css({
         opacity: "0",
-        bottom: "-100%"
+        bottom: "-100%",
+        scale: "0"
     })
 }
